@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <!-- 输出到控制台 -->
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <!-- 输出格式 -->
+            <PatternLayout pattern="ROOT:%d %-5p %C %L - %m%n" />
+        </Console>
+        <!-- 按天备份一个日志 -->
+        <!-- fileName为生成的文件名，x为路径，也可以采用相对路径模式，filePattern为时间到达后产生新日志，旧日志的文件名 -->
+        <RollingFile name="DAILY_FILE" fileName="/home/logs/apps/icode-cms/icode-cms.log"
+                     filePattern="/home/logs/apps/icode-cms/icode-cms.%d{yyyy-MM-dd}.log" >
+            <!-- 输出格式 -->
+            <PatternLayout pattern="%d %-5p %m%n" />
+            <Policies>
+                <!-- 每1天更新一次，此处查阅网上和官方示例中，都是以小时出现，我测试是以天为单位。（官方文档中说明按item类型是否是小时，但没找到在哪里设置item类型）另有其他各类型策略，请参阅官方文档 -->
+                <TimeBasedTriggeringPolicy modulate="true"
+                                           interval="1" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <!-- 链接到Console和RollingFile标签实现debug以上等级的输出 -->
+    <loggers>
+        <!-- 将业务dao接口填写进去,并用控制台输出即可 -->
+        <logger name="com.icode.cms.repository" level="DEBUG" additivity="false">
+            <appender-ref ref="DAILY_FILE"/>
+        </logger>
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+            <AppenderRef ref="DAILY_FILE" />
+        </root>
+    </loggers>
+</Configuration>
