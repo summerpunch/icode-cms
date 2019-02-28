@@ -31,6 +31,8 @@ public class CmsDictionary extends Model<CmsDictionary> {
      * 字典key：枚举形式的唯一key
      */
     private String itemKey;
+
+    private Integer itemLevel;
     /**
      * 字典值：枚举key对应的value，此值并不能作为外键用，一般用于配置项对应的值，而表关联则用字典主键id，
      */
