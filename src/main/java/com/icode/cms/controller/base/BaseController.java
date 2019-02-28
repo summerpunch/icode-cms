@@ -1,4 +1,4 @@
-package com.icode.cms.controller.system;
+package com.icode.cms.controller.base;
 
 import com.icode.cms.common.constant.PathFinal;
 import org.springframework.stereotype.Controller;

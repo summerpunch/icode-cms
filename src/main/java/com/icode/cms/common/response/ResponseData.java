@@ -13,7 +13,7 @@ public class ResponseData implements Serializable {
     private Object data;
 
     public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<String, Object>();
+        HashMap<String, Object> result = new HashMap<>();
         result.put("ret", success);
         result.put("msg", msg);
         result.put("code", code);

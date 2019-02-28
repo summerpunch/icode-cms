@@ -1,7 +1,7 @@
 package com.icode.cms.service;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.icode.cms.common.response.tree.TreeDictionaryResponse;
+import com.icode.cms.common.response.tree.ResponseDictionaryTree;
 import com.icode.cms.repository.entity.CmsDictionary;
 
 /**
@@ -20,7 +20,7 @@ public interface ICmsDictionaryService extends IService<CmsDictionary> {
      * Author: XiaChong<br>
      * Date: 2018/8/13 18:36<br>
      */
-    TreeDictionaryResponse getDictionaryTree();
+    ResponseDictionaryTree getDictionaryTree();
 
 
 }

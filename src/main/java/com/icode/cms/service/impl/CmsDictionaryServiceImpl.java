@@ -2,8 +2,8 @@ package com.icode.cms.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.icode.cms.common.response.tree.TreeDictionaryNode;
-import com.icode.cms.common.response.tree.TreeDictionaryResponse;
+import com.icode.cms.common.response.tree.DictionaryTreeNode;
+import com.icode.cms.common.response.tree.ResponseDictionaryTree;
 import com.icode.cms.common.utils.LoadDataUtil;
 import com.icode.cms.repository.entity.CmsDictionary;
 import com.icode.cms.repository.mapper.CmsDictionaryMapper;
@@ -31,7 +31,7 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
     private List<CmsDictionary> removeDictionaryList = new ArrayList<>();
 
     @Override
-    public TreeDictionaryResponse getDictionaryTree() {
+    public ResponseDictionaryTree getDictionaryTree() {
         List<CmsDictionary> listNodes = LoadDataUtil.getAllDictionary();
         if (listNodes.isEmpty()) {
             return getTree(initDictionary());
@@ -39,11 +39,11 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
         return getTree(listNodes);
     }
 
-    private TreeDictionaryResponse getTree(List<CmsDictionary> listNodes) {
-        TreeDictionaryResponse treeDictionaryResponse = new TreeDictionaryResponse();
-        List<TreeDictionaryNode> rootList = new ArrayList<>();
-        List<TreeDictionaryNode> nodes = new ArrayList<>();
-        TreeDictionaryNode root = new TreeDictionaryNode();
+    private ResponseDictionaryTree getTree(List<CmsDictionary> listNodes) {
+        ResponseDictionaryTree ResponseDictionaryTree = new ResponseDictionaryTree();
+        List<DictionaryTreeNode> rootList = new ArrayList<>();
+        List<DictionaryTreeNode> nodes = new ArrayList<>();
+        DictionaryTreeNode root = new DictionaryTreeNode();
         if (!listNodes.isEmpty()) {
             if (!removeDictionaryList.isEmpty()) {
                 removeDictionaryList.clear();
@@ -60,8 +60,8 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
             root.setNodes(nodes);
         }
         rootList.add(root);
-        treeDictionaryResponse.setData(rootList);
-        return treeDictionaryResponse;
+        ResponseDictionaryTree.setData(rootList);
+        return ResponseDictionaryTree;
     }
 
 
@@ -71,9 +71,9 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
      * Author: XiaChong<br>
      * Date: 2019/2/28 10:53<br>
      */
-    private TreeDictionaryNode facadeTree(CmsDictionary cmsDictionary) {
-        TreeDictionaryNode node = new TreeDictionaryNode();
-        List<TreeDictionaryNode> nodeList = new ArrayList<>();
+    private DictionaryTreeNode facadeTree(CmsDictionary cmsDictionary) {
+        DictionaryTreeNode node = new DictionaryTreeNode();
+        List<DictionaryTreeNode> nodeList = new ArrayList<>();
         if (cmsDictionary != null) {
             List<CmsDictionary> lists = getNextNode(cmsDictionary.getId());
             if (!lists.isEmpty()) {

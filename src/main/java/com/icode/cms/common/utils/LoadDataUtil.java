@@ -11,9 +11,10 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * 加载内存数据字典
- *
- * @author pengren
+ * Title: 加载内存数据字典<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/2/28 17:25<br>
  */
 public class LoadDataUtil {
 

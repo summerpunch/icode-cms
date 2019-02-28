@@ -8,7 +8,7 @@ package com.icode.cms.common.response;
  */
 public enum ResponseCodeEnum {
     /**
-     * Title: 返回成功<br>
+     * Title: 成功<br>
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2018/8/13 19:05<br>
@@ -51,8 +51,6 @@ public enum ResponseCodeEnum {
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2018/8/13 19:08<br>
-     * Param: <br>
-     * Return:
      */
     URL_INVALID_ERROR(4004, "URL Not Found"),
 
@@ -61,7 +59,6 @@ public enum ResponseCodeEnum {
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2018/8/13 19:07<br>
-     * Return:
      */
     UNAUTHORIZED(4003, "UNAUTHORIZED"),
 

@@ -8,13 +8,6 @@ package com.icode.cms.common.constant;
  */
 public class PathFinal {
 
-    public static final String RES_PAGE = ".page";
-    public static final String RES_JSON = ".json";
-    public static final String PAGE = "page";
-    public static final String JSON = "json";
-
-    //////////////////////页面路径相关 .start//////////////////////
-    public static final String PAGE_INDEX = "/views/sys/index";
-    //////////////////////页面路径相关 .end//////////////////////
+    public static final String PAGE_INDEX = "/views/index";
 
 }

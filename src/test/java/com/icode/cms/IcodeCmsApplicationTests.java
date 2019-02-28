@@ -1,6 +1,6 @@
 package com.icode.cms;
 
-import com.icode.cms.common.response.tree.TreeDictionaryResponse;
+import com.icode.cms.common.response.tree.ResponseDictionaryTree;
 import com.icode.cms.service.ICmsDictionaryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ public class IcodeCmsApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		TreeDictionaryResponse dictionaryTree = service.getDictionaryTree();
+		ResponseDictionaryTree dictionaryTree = service.getDictionaryTree();
 		System.out.println(dictionaryTree);
 	}
 

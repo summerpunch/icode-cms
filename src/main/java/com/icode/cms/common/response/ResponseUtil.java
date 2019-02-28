@@ -34,8 +34,6 @@ public class ResponseUtil {
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2018/8/13 18:43<br>
-     * Param: [data]<br>
-     * Return: com.icode.cas.common.response.ResponseData
      */
     public static ResponseData success(Object data) {
         ResponseData responseData = new ResponseData();
@@ -51,8 +49,6 @@ public class ResponseUtil {
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2018/8/13 18:43<br>
-     * Param: [message]<br>
-     * Return: com.icode.cas.common.response.ResponseData
      */
     public static ResponseData paramInvalidError(String message) {
         ResponseData resultData = new ResponseData();
@@ -67,8 +63,6 @@ public class ResponseUtil {
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2018/8/13 18:43<br>
-     * Param: [errors]<br>
-     * Return: com.icode.cas.common.response.ResponseData
      */
     public static ResponseData paramInvalidError(List<FieldError> errors) {
         ResponseData resultData = new ResponseData();
@@ -86,7 +80,6 @@ public class ResponseUtil {
         }
         resultData.setSuccess(false);
         resultData.setCode(ResponseCodeEnum.PARAM_INVALID_ERROR.getCode());
-
         return resultData;
     }
 
@@ -95,8 +88,6 @@ public class ResponseUtil {
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2018/8/13 18:43<br>
-     * Param: [message]<br>
-     * Return: com.icode.cas.common.response.ResponseData
      */
     public static ResponseData businessError(String message) {
         ResponseData resultData = new ResponseData();

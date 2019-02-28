@@ -1,7 +1,7 @@
-package com.icode.cms.controller.system;
+package com.icode.cms.controller;
 
 
-import com.icode.cms.common.response.tree.TreeDictionaryResponse;
+import com.icode.cms.common.response.tree.ResponseDictionaryTree;
 import com.icode.cms.service.ICmsDictionaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ public class CmsDictionaryController {
      */
     @RequestMapping(value = "ajax/dictionary/tree", produces = "application/json")
     @ResponseBody
-    public TreeDictionaryResponse getDictionaryTree() {
+    public ResponseDictionaryTree getDictionaryTree() {
         return service.getDictionaryTree();
     }
 
