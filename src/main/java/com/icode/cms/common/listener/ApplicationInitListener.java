@@ -7,9 +7,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
- * ApplicationInitListener
- *
- * @author pengren
+ * Title: ApplicationInitListener监听器<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/2/28 17:17<br>
  */
 public class ApplicationInitListener implements ApplicationListener<ApplicationReadyEvent> {
 
