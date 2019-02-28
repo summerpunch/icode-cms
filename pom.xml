@@ -103,6 +103,13 @@
             <scope>true</scope>
         </dependency>
 
+        <!-- fastjson 数据配置 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.46</version>
+        </dependency>
+
 
         <!-- shiro
         <dependency>

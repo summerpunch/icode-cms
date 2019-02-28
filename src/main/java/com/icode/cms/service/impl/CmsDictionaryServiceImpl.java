@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.icode.cms.common.response.tree.TreeDictionaryNode;
 import com.icode.cms.common.response.tree.TreeDictionaryResponse;
+import com.icode.cms.common.utils.LoadDataUtil;
 import com.icode.cms.repository.entity.CmsDictionary;
 import com.icode.cms.repository.mapper.CmsDictionaryMapper;
 import com.icode.cms.service.ICmsDictionaryService;
@@ -31,13 +32,17 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
 
     @Override
     public TreeDictionaryResponse getDictionaryTree() {
+        List<CmsDictionary> listNodes = LoadDataUtil.getAllDictionary();
+        if (listNodes.isEmpty()) {
+            return getTree(initDictionary());
+        }
+        return getTree(listNodes);
+    }
+
+    private TreeDictionaryResponse getTree(List<CmsDictionary> listNodes) {
         TreeDictionaryResponse treeDictionaryResponse = new TreeDictionaryResponse();
-        EntityWrapper<CmsDictionary> wrapper = new EntityWrapper<>();
-        wrapper.orderBy("item_level", true);
-        wrapper.orderBy("update_time", false);
-        List<CmsDictionary> listNodes = selectList(wrapper);
-        List<TreeDictionaryNode> nodes = new ArrayList<>();
         List<TreeDictionaryNode> rootList = new ArrayList<>();
+        List<TreeDictionaryNode> nodes = new ArrayList<>();
         TreeDictionaryNode root = new TreeDictionaryNode();
         if (!listNodes.isEmpty()) {
             if (!removeDictionaryList.isEmpty()) {
@@ -49,7 +54,7 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
                     root.setParentId(cd.getParentId());
                     root.setText(cd.getItemNamecn());
                 } else {
-                    nodes.add(facadeTree(listNodes, cd));
+                    nodes.add(facadeTree(cd));
                 }
             });
             root.setNodes(nodes);
@@ -59,20 +64,21 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
         return treeDictionaryResponse;
     }
 
+
     /**
      * Title: 递归查询子节点<br>
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2019/2/28 10:53<br>
      */
-    private TreeDictionaryNode facadeTree(List<CmsDictionary> listNodes, CmsDictionary cmsDictionary) {
+    private TreeDictionaryNode facadeTree(CmsDictionary cmsDictionary) {
         TreeDictionaryNode node = new TreeDictionaryNode();
         List<TreeDictionaryNode> nodeList = new ArrayList<>();
-        if (!listNodes.isEmpty() && cmsDictionary != null) {
-            List<CmsDictionary> lists = getNextNode(listNodes, cmsDictionary.getId());
+        if (cmsDictionary != null) {
+            List<CmsDictionary> lists = getNextNode(cmsDictionary.getId());
             if (!lists.isEmpty()) {
                 for (CmsDictionary data : lists) {
-                    nodeList.add(facadeTree(listNodes, data));
+                    nodeList.add(facadeTree(data));
                     node.setNodes(nodeList);
                     removeDictionaryList.add(data);
                 }
@@ -90,9 +96,25 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
      * Author: XiaChong<br>
      * Date: 2019/2/28 10:53<br>
      */
-    private List<CmsDictionary> getNextNode(List<CmsDictionary> listNodes, Integer id) {
-        List<CmsDictionary> lists = new ArrayList<>();
-        listNodes.parallelStream().filter(cd -> !removeDictionaryList.contains(cd) && cd.getParentId().equals(id)).forEachOrdered(datas -> lists.add(datas));
-        return lists;
+    private List<CmsDictionary> getNextNode(Integer id) {
+        return LoadDataUtil.getDicChildById(id);
+    }
+
+    /**
+     * Title: 重新加载字典数据<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/2/28 16:20<br>
+     */
+    private List<CmsDictionary> initDictionary() {
+        EntityWrapper<CmsDictionary> wrapper = new EntityWrapper<>();
+        wrapper.orderBy("item_level", true);
+        wrapper.orderBy("update_time", false);
+        List<CmsDictionary> listNodes = selectList(wrapper);
+        if (!listNodes.isEmpty()) {
+            LoadDataUtil.buildLocalCache(listNodes);
+            return listNodes;
+        }
+        return null;
     }
 }
