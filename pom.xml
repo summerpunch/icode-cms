@@ -16,6 +16,7 @@
     <description>内容管理系统</description>
 
     <properties>
+        <start-class>com.icode.cms.IcodeCmsApplication</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class CmsDictionaryDTO implements Serializable {
+public class CmsDictionaryDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

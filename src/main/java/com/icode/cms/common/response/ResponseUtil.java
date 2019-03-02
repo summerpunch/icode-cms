@@ -17,15 +17,14 @@ public class ResponseUtil {
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2018/8/13 18:43<br>
-     * Param: [data, msg]<br>
-     * Return: com.icode.cas.common.response.ResponseData
      */
-    public static ResponseData success(Object data,String msg) {
+    public static ResponseData success(Object data, String msg) {
         ResponseData responseData = new ResponseData();
         responseData.setCode(ResponseCodeEnum.SUCCESS.getCode());
         responseData.setMsg(msg);
         responseData.setSuccess(true);
         responseData.setData(data);
+        responseData.setStatus("success");
         return responseData;
     }
 
@@ -41,6 +40,7 @@ public class ResponseUtil {
         responseData.setMsg(ResponseCodeEnum.SUCCESS.getDescribe());
         responseData.setSuccess(true);
         responseData.setData(data);
+        responseData.setStatus("success");
         return responseData;
     }
 
@@ -55,6 +55,7 @@ public class ResponseUtil {
         resultData.setSuccess(false);
         resultData.setCode(ResponseCodeEnum.PARAM_INVALID_ERROR.getCode());
         resultData.setMsg(message);
+        resultData.setStatus("warning");
         return resultData;
     }
 
@@ -79,6 +80,7 @@ public class ResponseUtil {
             resultData.setMsg(ResponseCodeEnum.PARAM_INVALID_ERROR.getDescribe());
         }
         resultData.setSuccess(false);
+        resultData.setStatus("warning");
         resultData.setCode(ResponseCodeEnum.PARAM_INVALID_ERROR.getCode());
         return resultData;
     }
@@ -94,6 +96,22 @@ public class ResponseUtil {
         resultData.setSuccess(false);
         resultData.setCode(ResponseCodeEnum.SERVICE_BUSINESS_ERROR.getCode());
         resultData.setMsg(message);
+        resultData.setStatus("error");
+        return resultData;
+    }
+
+    /**
+     * Title: 唯一校验<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2018/8/13 18:43<br>
+     */
+    public static ResponseData uniquenessError(String message) {
+        ResponseData resultData = new ResponseData();
+        resultData.setSuccess(false);
+        resultData.setCode(ResponseCodeEnum.UNIQUENESS_EXCEPTION.getCode());
+        resultData.setMsg(message);
+        resultData.setStatus("info");
         return resultData;
     }
 }

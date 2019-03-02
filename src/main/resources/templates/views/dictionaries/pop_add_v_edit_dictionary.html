@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">关闭</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">数据字典</h4>
+    </div>
+
+    <div class="ibox-content pre-scrollable" style="max-height:600px;overflow-y:auto;">
+        <form class="form-horizontal" id="_dict_add_v_edit_form">
+
+            <input type="hidden" th:id="_id" th:name="id" th:value="${casSysDictionary.id}">
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">父节点：</label>
+                <div class="col-sm-8">
+                    <input th:value="${parentDict.itemNamecn}" class="form-control" type="text" disabled>
+                    <input th:id="_parentId" th:name="parentId" th:value="${casSysDictionary.parentId}" class="form-control" type="hidden">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">字典key：</label>
+                <div class="col-sm-8">
+                    <input th:id="_itemKey" th:name="itemKey" th:value="${casSysDictionary.itemKey}" class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">字典value：</label>
+                <div class="col-sm-8">
+                    <input th:id="_itemValue" th:name="itemValue" th:value="${casSysDictionary.itemValue}" class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">字典名称：</label>
+                <div class="col-sm-8">
+                    <input th:id="_itemNamecn" th:name="itemNamecn" th:value="${casSysDictionary.itemNamecn}" class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">排序：</label>
+                <div class="col-sm-8">
+                    <input th:id="_sort" th:name="sort" th:value="${casSysDictionary.sort}" class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">状态：</label>
+                <div class="col-sm-8">
+                    <input th:id="_status" th:name="status" th:value="${casSysDictionary.status}" class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">描述：</label>
+                <div class="col-sm-8">
+                    <input th:id="_description" th:name="description" th:value="${casSysDictionary.description}" class="form-control" type="text">
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="_saveDict">保存</button>
+    </div>
+
+    <script th:src="@{/cms/dictionaries/pop_add_v_edit_dictionary.js}"></script>
+</body>
+</html>

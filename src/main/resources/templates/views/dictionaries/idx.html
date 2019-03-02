@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:include="layout/header"/>
+</head>
+<body class="gray-bg">
+<div class="row wrapper wrapper-content animated fadeInRight">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>数据字典</h5>
+            </div>
+            <div class="ibox-content">
+                <p>
+                    由项目成员共同维护。它像一个字典，
+                    你可以查询任何在项目中你无法理解的各种结构、类型定义，
+                    从而最大程度的消除歧义和交流不畅问题 .
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 字典结构树 -->
+    <div class="col-sm-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>字典结构树</h5>
+            </div>
+            <div class="ibox-content">
+                <div id="_dictJson" class="test"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 数据字典列表 -->
+    <div class="col-sm-9">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>字典数据列表</h5>
+            </div>
+
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="example-wrap">
+                            <div class="example">
+                                <div class="btn-group hidden-xs" id="exampleToolbar" role="group">
+                                    <button type="button" class="btn btn-outline btn-default" id="_addDictionary">
+                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default" id="_editDictionary">
+                                        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default" id="_delDictionary">
+                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                                    </button>
+                                    <form id="_dictFormSearch">
+                                        <div class="input-group">
+                                            <div class="col-sm-3 input-group" style="float: right;">
+                                                <input type="text" placeholder="按状态" id="_status" name="status"
+                                                       class="input form-control">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-white dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-right" role="menu"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 input-group" style="float: right;">
+                                                <input type="text" placeholder="按字典Key" name="itemKey"
+                                                       class="input form-control">
+                                            </div>
+                                            <div class="col-sm-3 input-group" style="float: right;">
+                                                <input type="text" placeholder="按字典名称" name="itemNamecn"
+                                                       class="input form-control">
+                                            </div>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn btn-primary"
+                                                        onclick="DictionaryTableUtil.dictSearch()">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                                 <button type="button" class="btn btn btn-primary"
+                                                         onclick="fromClears('#_dictFormSearch')">
+                                                    <i class="fa fa-remove"></i>
+                                                </button>
+                                            </span>
+
+                                        </div>
+                                    </form>
+                                </div>
+                                <table id="_dictionary_table"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    bootstrap
+    模态框弹出层
+    modal-lg 大尺寸
+    不填      中尺寸
+    modal-sm 小尺寸
+ -->
+<div class="modal" id="_pop_add_v_edit_dictionary" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/cms/dictionaries/idx.js}"></script>
+<script type="text/javascript">
+    //data 数据中获取
+    var testdataBsSuggest = $("#_status").bsSuggest({
+        // indexId: 2, //data.value 的第几个数据，作为input输入框的内容
+        //  indexKey: 1, //data.value 的第几个数据，作为input输入框的内容
+        //     idField: 'name',
+        //    keyField: 'id',
+        data: {
+            'value': [
+                {
+                    'id': '14',
+                    'name': '启用'
+                }
+                ,
+                {
+                    'id': '15',
+                    'name': '禁用'
+                }
+            ],
+            'defaults': 'http://lzw.me'
+        }
+    });
+
+
+</script>
+</body>
+</html>

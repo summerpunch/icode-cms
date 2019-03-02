@@ -20,23 +20,8 @@ public enum ResponseCodeEnum {
      * Author: XiaChong<br>
      * Date: 2018/8/13 19:05<br>
      */
-    GLOBAL_EXCEPTION(4000, "Global exception"),
+    GLOBAL_EXCEPTION(4000, "Global Error"),
 
-    /**
-     * Title: 参数校验错误<br>
-     * Description: <br>
-     * Author: XiaChong<br>
-     * Date: 2018/8/13 19:10<br>
-     */
-    NULL_EXCEOTION(4001, "Null exception"),
-
-    /**
-     * Title: 被预留错误<br>
-     * Description: <br>
-     * Author: XiaChong<br>
-     * Date: 2018/8/13 19:12<br>
-     */
-    TYPE_MISMATCH_EXCEPTION(4002, "TypeMismatch exception"),
 
     /**
      * Title: 参数校验错误<br>
@@ -47,12 +32,13 @@ public enum ResponseCodeEnum {
     PARAM_INVALID_ERROR(4001, "Param Invalid Error"),
 
     /**
-     * Title: 找不到资源<br>
+     * Title: 唯一性校验错误<br>
      * Description: <br>
      * Author: XiaChong<br>
-     * Date: 2018/8/13 19:08<br>
+     * Date: 2018/8/13 19:12<br>
      */
-    URL_INVALID_ERROR(4004, "URL Not Found"),
+    UNIQUENESS_EXCEPTION(4002, "Uniqueness Error"),
+
 
     /**
      * Title: 拒绝访问<br>
@@ -63,12 +49,36 @@ public enum ResponseCodeEnum {
     UNAUTHORIZED(4003, "UNAUTHORIZED"),
 
     /**
+     * Title: 找不到资源<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2018/8/13 19:08<br>
+     */
+    URL_INVALID_ERROR(4004, "URL Not Found"),
+
+    /**
+     * Title: 参数校验错误<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2018/8/13 19:10<br>
+     */
+    NULL_EXCEOTION(4005, "Null exception"),
+
+    /**
      * Title: 不允许此方法<br>
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2018/8/13 19:08<br>
      */
-    UNAUTHENTICATEDEXCEPTION(4005, "UnauthenticatedException"),
+    UNAUTHENTICATEDEXCEPTION(4006, "UnauthenticatedException"),
+
+    /**
+     * Title: 被预留错误<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2018/8/13 19:12<br>
+     */
+    TYPE_MISMATCH_EXCEPTION(4007, "TypeMismatch exception"),
 
     /**
      * Title: Service业务错误<br>

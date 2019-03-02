@@ -1,7 +1,10 @@
 package com.icode.cms.controller;
 
 
-import com.icode.cms.common.response.tree.ResponseDictionaryTree;
+import com.icode.cms.common.constant.PathFinal;
+import com.icode.cms.common.response.ResponseData;
+import com.icode.cms.common.response.ResponseDataTable;
+import com.icode.cms.repository.qo.CmsDictionaryQo;
 import com.icode.cms.service.ICmsDictionaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,18 +30,57 @@ public class CmsDictionaryController {
     @Autowired
     private ICmsDictionaryService service;
 
+    /**
+     * Title: 跳转首页<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/1 11:17<br>
+     */
+    @RequestMapping("/pop/idx")
+    public String index() {
+        return PathFinal.PAGE_DICTIONARIES_IDX;
+    }
 
     /**
      * Title: 获取数据字典结构树<br>
      * Description: <br>
      * Author: XiaChong<br>
-     * Date: 2018/8/13 18:40<br>
+     * Date: 2019/3/1 11:17<br>
      */
     @RequestMapping(value = "ajax/dictionary/tree", produces = "application/json")
     @ResponseBody
-    public ResponseDictionaryTree getDictionaryTree() {
+    public ResponseData getDictionaryTree() {
         return service.getDictionaryTree();
     }
+
+
+    /**
+     * Title: 按条件查询数据字典列表<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/1 11:17<br>
+     */
+    @RequestMapping(value = "/get/dictionaryList")
+    @ResponseBody
+    public ResponseDataTable getDictionaryList(CmsDictionaryQo qo) {
+        return new ResponseDataTable(true, service.getDictionaryList(qo));
+    }
+
+    /**
+     * Title: 根据id删除<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/1 19:55<br>
+     */
+    @RequestMapping("/remove/dictionaryById")
+    @ResponseBody
+    public ResponseData removeDictionaryById(Integer id){
+        return service.removeDictionaryById(id);
+    }
+
+
+
+
 
 
 }

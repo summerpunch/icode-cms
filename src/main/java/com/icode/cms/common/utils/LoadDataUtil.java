@@ -6,9 +6,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.stream.Collectors;
 
 /**
  * Title: 加载内存数据字典<br>
@@ -42,12 +46,15 @@ public class LoadDataUtil {
     public static void buildLocalCache(List<CmsDictionary> listDictionary) {
         w.lock();
         try {
-            clearMap();
-            for (CmsDictionary cmsDictionary : listDictionary) {
-                KEY_MAP.put(cmsDictionary.getItemKey(), cmsDictionary);
-                ID_MAP.put(cmsDictionary.getId(), cmsDictionary);
+            if (!listDictionary.isEmpty()) {
+                clearMap();
+                listDictionary.parallelStream().forEachOrdered(cd -> {
+                            KEY_MAP.put(cd.getItemKey(), cd);
+                            ID_MAP.put(cd.getId(), cd);
+                        }
+                );
+                LIST_NODES.addAll(listDictionary);
             }
-            LIST_NODES.addAll(listDictionary);
         } finally {
             w.unlock();
         }
@@ -65,6 +72,9 @@ public class LoadDataUtil {
         }
         if (!ID_MAP.isEmpty()) {
             ID_MAP.clear();
+        }
+        if (!LIST_NODES.isEmpty()) {
+            LIST_NODES.clear();
         }
     }
 
@@ -135,7 +145,7 @@ public class LoadDataUtil {
     }
 
     /**
-     * Title: 根据key获取所有子节点<br>
+     * Title: 根据key获取子节点<br>
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2019/2/28 16:52<br>
@@ -145,18 +155,14 @@ public class LoadDataUtil {
     public static List<CmsDictionary> getDicChildByKey(String key) throws NullPointerException {
         r.lock();
         try {
-            CmsDictionary dictionary = getDicDataByKey(key);
-            if (dictionary != null) {
-                return getDicChild(dictionary.getId());
-            }
-            return null;
+            return getDicDataByKey(key) == null ? null : getDicChild(getDicDataByKey(key));
         } finally {
             r.unlock();
         }
     }
 
     /**
-     * Title: 根据Id获取所有子节点<br>
+     * Title: 根据Id获取子节点<br>
      * Description: <br>
      * Author: XiaChong<br>
      * Date: 2019/2/28 16:52<br>
@@ -166,17 +172,19 @@ public class LoadDataUtil {
     public static List<CmsDictionary> getDicChildById(Integer id) throws NullPointerException {
         r.lock();
         try {
-            return getDicChild(id);
+            return getDicDataById(id) == null ? null : getDicChild(getDicDataById(id));
         } finally {
             r.unlock();
         }
     }
 
-    private static List<CmsDictionary> getDicChild(Integer id) {
-        List<CmsDictionary> lists = new ArrayList<>();
-        LIST_NODES.parallelStream().filter(cd -> cd.getParentId().equals(id)).forEachOrdered(cd -> lists.add(cd));
-        return lists;
+    /**
+     * Title: 查找子节点<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/1 10:18<br>
+     */
+    public static List<CmsDictionary> getDicChild(CmsDictionary cmsDictionary) {
+        return LIST_NODES.parallelStream().filter(cd -> cd.getParentId().equals(cmsDictionary.getId())).collect(Collectors.toList());
     }
-
-
 }

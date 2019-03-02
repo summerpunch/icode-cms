@@ -10,4 +10,6 @@ public class PathFinal {
 
     public static final String PAGE_INDEX = "/views/index";
 
+    public static final String PAGE_DICTIONARIES_IDX = "/views/dictionaries/idx";
+
 }
