@@ -1,29 +1,48 @@
 $(function () {
 
-    /**
-     * 初始化表单验证
-     */
     formValidator();
 
+    /**
+     * Title: 保存<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 17:13<br>
+     */
+    $("#_saveDict").on("click", function () {
+        if (BootstrapModalUtil.fromValid($('#_dict_add_v_edit_form'))) {
+            var params = JsonUtil.serializeObject($("#_dict_add_v_edit_form"));
+            HttpUtil.ajaxAsynchronizationRequest(PathUtil.dictionaries() + "/do/save_v_update_dictionary", params, function (data) {
+                $("#_base_template").modal("hide");
+                BootstrapTableUtil.refreshBootstrapTable($("#_dictionary_table"));
+                if (params.id) {
+                    BootstrapTreeUtil.refreshEditTreeview($('#_dictJson'), EntityUtil.dictTreeJson(data.data));
+                } else {
+                    BootstrapTreeUtil.refreshAddTreeview($('#_dictJson'), EntityUtil.dictTreeJson(data.data));
+                }
+            });
+        }
+    });
 });
 
 /**
- * form验证规则
+ * Title: 表单验证<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/3/5 19:48<br>
  */
 function formValidator() {
 
-    $("#_dict_add_v_edit_form").bootstrapValidator({//根据自己的formid进行更改
-        message: 'This value is not valid',//默认提示信息
-        feedbackIcons: {//提示图标
+    $("#_dict_add_v_edit_form").bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-
             parentId: {
                 message: '父节点 验证失败 .',
-                validators: {//验证条件
+                validators: {
                     notEmpty: {
                         message: '父节点名称 不能为空 .'
                     },
@@ -37,21 +56,21 @@ function formValidator() {
 
             itemKey: {
                 message: '字典Key 验证失败 .',
-                validators: {//验证条件
+                validators: {
                     notEmpty: {
-                        message: '字典Key 不能为空 .'
+                        message: '字典Key不能为空 .'
                     },
                     stringLength: {
                         min: 1,
                         max: 100,
-                        message: '字典Key 不能超过 100 个字符 .'
+                        message: '字典Key不能超过 100 个字符 .'
                     },
-                    remote: {//验证唯一性
-                        url: '/casSysDictionary/do_verify_dictionary',
+                    remote: {
+                        url: PathUtil.dictionaries() + '/get/uniqueness_dictionary',
                         message: '字典Key已存在 , 请重新输入 .',
                         delay: 1000,
                         type: 'POST',
-                        dataType:"json",
+                        dataType: "json",
                         data: {
                             id: $('#_id').val(),
                             itemKey: $('#itemKey').val(),
@@ -63,42 +82,42 @@ function formValidator() {
 
             itemValue: {
                 message: '字典Value 验证失败 .',
-                validators: {//验证条件
+                validators: {
                     notEmpty: {
-                        message: '字典Value 不能为空 .'
+                        message: '字典Value不能为空 .'
                     },
                     stringLength: {
                         min: 1,
                         max: 100,
-                        message: '字典Value 不能超过 100 个字符 .'
+                        message: '字典Value不能超过100个字符 .'
                     }
                 }
             },
 
             itemNamecn: {
-                message: '字典名称 验证失败 .',
-                validators: {//验证条件
+                message: '字典名称验证失败 .',
+                validators: {
                     notEmpty: {
-                        message: '字典名称 不能为空 .'
+                        message: '字典名称不能为空 .'
                     },
                     stringLength: {
                         min: 1,
                         max: 100,
-                        message: '字典名称 不能超过 100 个字符 .'
+                        message: '字典名称不能超过 100 个字符 .'
                     }
                 }
             },
 
             sort: {
-                message: '排序 验证失败 .',
-                validators: {//验证条件
+                message: '排序验证失败 .',
+                validators: {
                     notEmpty: {
-                        message: '排序 不能为空 .'
+                        message: '排序不能为空 .'
                     },
                     stringLength: {
                         min: 1,
                         max: 10,
-                        message: '排序 不能超过 10 个字符 .'
+                        message: '排序不能超过 10 个字符 .'
                     },
                     regexp: {//正则验证
                         regexp: /^[1-9]\d{0,7}$/,
@@ -108,61 +127,33 @@ function formValidator() {
             },
 
             status: {
-                message: '状态 验证失败 .',
-                validators: {//验证条件
+                message: '状态验证失败 .',
+                validators: {
                     notEmpty: {
-                        message: '状态 不能为空 .'
+                        message: '状态不能为空 .'
                     },
                     stringLength: {
                         min: 1,
                         max: 100,
-                        message: '状态 不能超过 100 个字符 .'
+                        message: '状态不能超过 100 个字符 .'
                     }
                 }
             },
 
             description: {
-                message: '描述 验证失败 .',
-                validators: {//验证条件
+                message: '描述验证失败 .',
+                validators: {
                     notEmpty: {
-                        message: '描述 不能为空 .'
+                        message: '描述不能为空 .'
                     },
                     stringLength: {
                         min: 1,
                         max: 100,
-                        message: '描述 不能超过 100 个字符 .'
+                        message: '描述不能超过 100 个字符 .'
                     }
                 }
             },
 
         },
     })
-
 }
-
-/**
- * 保存字典
- */
-$("#_saveDict").on("click", function () {
-    var _this = $('#_dict_add_v_edit_form');
-    if (fromValid(_this)) {
-        var params = serializeObject($("#_dict_add_v_edit_form"));
-        ajaxRequest("/casSysDictionary/do_save_v_update_dictionary", params, function () {
-            //关闭模态框
-            $("#_pop_add_v_edit_dictionary").modal("hide");
-            refreshBootstrapTable($("#exampleTableToolbar"));
-            if( params.id != '' && params.id != null && params.id != undefined ){
-                var newNode={
-                    text:params.itemNamecn
-                };
-                refreshEditTreeview($('#dictJson'),newNode);
-            } else {
-                var newNode={
-                    id:responseId,
-                    text:params.itemNamecn
-                };
-                refreshAddTreeview($('#dictJson'),newNode);
-            }
-        });
-    }
-});

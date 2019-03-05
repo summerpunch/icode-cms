@@ -1,3 +1,10 @@
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+/*             Bootstrap相关公共方法                 */
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
 //处理BootstrapTable数据列表的公共方法
 var BootstrapTableUtil = {
     /**
@@ -96,6 +103,16 @@ var BootstrapTableUtil = {
      */
     refreshBootstrapTable: function (_this) {
         _this.bootstrapTable('refresh');
+    },
+
+    /**
+     * Title: 获取选中的数据<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 13:55<br>
+     */
+    getPitchOnTableData: function (_this) {
+        return _this.bootstrapTable('getSelections')[0];
     }
 };
 
@@ -115,6 +132,270 @@ var BootstrapTreeUtil = {
                 _this.treeview('removeNode', [obj, {silent: true}]);
                 return false;
             }
-        })
+        });
+    },
+    /**
+     * Title: 更新后刷新<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 19:34<br>
+     */
+    refreshEditTreeview: function (_this, json) {
+        var node = _this.treeview('getSelected');
+        var nodes = node[0].nodes;
+        $.each(nodes, function (index, obj) {
+            if (obj.id == json.id) {
+                _this.treeview('updateNode', [obj, json]);
+                return false;
+            }
+        });
+    },
+    /**
+     * Title: 新增后刷新<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 19:34<br>
+     */
+    refreshAddTreeview: function (_this, json) {
+        var node = _this.treeview('getSelected');
+        var nodes = node[0].nodes;
+        $.each(nodes, function (index, obj) {
+            if (obj.id == json.parentId) {
+                _this.treeview('addNode', [json, obj]);
+                return false;
+            }
+        });
     },
 };
+
+//处理BootstrapModal的公共方法
+var BootstrapModalUtil = {
+    openWin: function (id, url) {
+        $(id).modal({
+            remote: url,
+            backdrop: "static",
+            keyboard: true,
+        })
+    },
+    /**
+     * Title: Bootstrap手动验证表单<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 17:22<br>
+     */
+    fromValid: function (_this) {
+        //启用验证
+        _this.data('bootstrapValidator').validate();
+        //验证是否通过true/false
+        return _this.data('bootstrapValidator').isValid();
+    }
+};
+
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+/*                其余相关公共方法                   */
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+/**
+ * Title: 路径<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/3/2 10:12<br>
+ */
+var PathUtil = {
+    dictionaries: function () {
+        return '/cms/dictionary';
+    }
+};
+
+/**
+ * Title: 弹窗(删除提示)<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/3/2 10:12<br>
+ */
+var POP_UP_Util = {
+    remove: function (callback) {
+        swal({
+                title: "您确定要删除这条信息吗",
+                text: "删除后将无法恢复，请谨慎操作",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是的，我要删除",
+                cancelButtonText: "让我再考虑一下",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    callback();
+                    swal.close();
+                } else {
+                    swal("已取消", "您取消了删除操作", "error");
+                }
+            });
+    }
+};
+
+/**
+ * Title: 提示<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/3/2 10:12<br>
+ */
+var ToastOptionsUtil = {
+    show: function (data) {
+        toastr.options = {
+            closeButton: true,
+            debug: false,
+            progressBar: true,
+            positionClass: 'toast-top-right',
+            onclick: null
+        };
+        toastr[data.status](data.msg, "Hi, warm prompt .");
+    }
+};
+
+/**
+ * Title: http请求<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/3/2 10:12<br>
+ */
+var HttpUtil = {
+    /**
+     * Title: 同步请求<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/2 10:04<br>
+     */
+    ajaxSynchronizationRequest: function (url, params, callback) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params,
+            async: true,
+            success: function (data) {
+                if (data.code == 1000) {
+                    if (callback != undefined && callback != null) {
+                        callback();
+                    }
+                }
+                ToastOptionsUtil.show(data);
+            }
+        });
+    },
+
+    /**
+     * Title: 异步请求<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/2 10:04<br>
+     */
+    ajaxAsynchronizationRequest: function (url, params, callback) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params,
+            success: function (data) {
+                if (data.code == 1000) {
+                    if (callback != undefined && callback != null) {
+                        callback(data);
+                    }
+                }
+                ToastOptionsUtil.show(data);
+            }
+        });
+    }
+};
+
+/**
+ * Title: JSON<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/3/2 10:12<br>
+ */
+var JsonUtil = {
+    /**
+     * Title: 验证json对象是否为空<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 13:58<br>
+     */
+    isEmptyObject: function (e) {
+        var t;
+        for (t in e) {
+            return true;
+        }
+        return false;
+    },
+
+    /**
+     * Title: 序列化表单为JSON对象<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 14:28<br>
+     */
+    serializeObject: function (_this) {
+        var o = {};
+        var a = _this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    }
+};
+
+/**
+ * Title: 清除<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/3/5 19:36<br>
+ */
+var ClearUtil = {
+
+    /**
+     * Title: 清空搜索条件<br>
+     * Description: 这种方式虽然可以重置表单，但是不能重置隐藏字段。隐藏字段要单独处理<br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 17:21<br>
+     */
+    fromClears: function (id) {
+        $(id)[0].reset();
+    }
+};
+
+/**
+ * Title: 实体类工具类<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Date: 2019/3/5 19:40<br>
+ */
+var EntityUtil = {
+
+    /**
+     * Title: BootstrapTree新增修改删除Json工具类<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 19:38<br>
+     */
+    dictTreeJson: function (json) {
+        return {
+            id: json.id,
+            parentId: json.parentId,
+            text: json.itemNamecn
+        }
+    }
+};
+
+

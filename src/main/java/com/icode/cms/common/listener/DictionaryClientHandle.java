@@ -1,7 +1,6 @@
 package com.icode.cms.common.listener;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.icode.cms.common.utils.LoadDataUtil;
 import com.icode.cms.repository.entity.CmsDictionary;
 import com.icode.cms.service.ICmsDictionaryService;
@@ -32,20 +31,12 @@ public class DictionaryClientHandle {
      */
     public String loadDictionaryFromDB(ConfigurableApplicationContext applicationContext) {
         ICmsDictionaryService cmsDictionaryService = applicationContext.getBean(ICmsDictionaryService.class);
-        EntityWrapper<CmsDictionary> wrapper = new EntityWrapper<>();
-        wrapper.orderBy("item_level", true);
-        wrapper.orderBy("update_time", false);
-
-        List<CmsDictionary> list = cmsDictionaryService.selectList(wrapper);
-        if(!list.isEmpty()){
-            LoadDataUtil.buildLocalCache(list);
+        List<CmsDictionary> list = LoadDataUtil.initDictionary(cmsDictionaryService);
+        if (!list.isEmpty()) {
+            return JSON.toJSONString(list);
         }
-        return JSON.toJSONString(list);
+        return null;
     }
-
-
-
-
 
 
 }

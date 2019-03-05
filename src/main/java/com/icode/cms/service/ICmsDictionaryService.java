@@ -3,9 +3,11 @@ package com.icode.cms.service;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.icode.cms.common.response.ResponseData;
+import com.icode.cms.common.response.ResponseVerifyData;
 import com.icode.cms.repository.dto.CmsDictionaryDto;
 import com.icode.cms.repository.entity.CmsDictionary;
 import com.icode.cms.repository.qo.CmsDictionaryQo;
+import com.icode.cms.repository.vo.CmsDictionaryVO;
 
 /**
  * <p>
@@ -41,4 +43,20 @@ public interface ICmsDictionaryService extends IService<CmsDictionary> {
      * Date: 2019/3/1 19:57<br>
      */
     ResponseData removeDictionaryById(Integer id);
+
+    /**
+     * Title: 新增or编辑保存<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 14:14<br>
+     */
+    ResponseData saveOrUpdateDictionary(CmsDictionaryVO vo);
+
+    /**
+     * Title: 校验数据唯一性<br>
+     * Description: itemKey<br>
+     * Author: XiaChong<br>
+     * Date: 2019/3/5 14:31<br>
+     */
+    ResponseVerifyData uniquenessDictionary(Integer id, String itemKey, String fields);
 }

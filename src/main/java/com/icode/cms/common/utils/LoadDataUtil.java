@@ -1,7 +1,9 @@
 package com.icode.cms.common.utils;
 
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.icode.cms.repository.entity.CmsDictionary;
+import com.icode.cms.service.ICmsDictionaryService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Title: 加载内存数据字典<br>
@@ -31,6 +35,8 @@ public class LoadDataUtil {
     private static final List<CmsDictionary> LIST_NODES = new ArrayList<>();
 
     private static ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+
+    private static Supplier<Stream<CmsDictionary>> PARALLEL_STREAM;
 
     private static Lock r = rwl.readLock();
 
@@ -54,6 +60,7 @@ public class LoadDataUtil {
                         }
                 );
                 LIST_NODES.addAll(listDictionary);
+                PARALLEL_STREAM = () -> listDictionary.parallelStream();
             }
         } finally {
             w.unlock();
@@ -185,6 +192,24 @@ public class LoadDataUtil {
      * Date: 2019/3/1 10:18<br>
      */
     public static List<CmsDictionary> getDicChild(CmsDictionary cmsDictionary) {
-        return LIST_NODES.parallelStream().filter(cd -> cd.getParentId().equals(cmsDictionary.getId())).collect(Collectors.toList());
+        return PARALLEL_STREAM.get().filter(cd -> cd.getParentId().equals(cmsDictionary.getId())).collect(Collectors.toList());
+    }
+
+    /**
+     * Title: 初始化字典数据<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Date: 2019/2/28 16:20<br>
+     */
+    public static List<CmsDictionary> initDictionary(ICmsDictionaryService cmsDictionaryService) {
+        EntityWrapper<CmsDictionary> wrapper = new EntityWrapper<>();
+        wrapper.orderBy("item_level", true);
+        wrapper.orderBy("update_time", false);
+        List<CmsDictionary> listNodes = cmsDictionaryService.selectList(wrapper);
+        if (!listNodes.isEmpty()) {
+            LoadDataUtil.buildLocalCache(listNodes);
+            return listNodes;
+        }
+        return null;
     }
 }

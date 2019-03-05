@@ -3,10 +3,10 @@ function viewSearch(id) {
     console.info('查看');
 }
 
-function viewUpdate(id) {
-    console.info(id);
-    console.info('更新');
-}
+function viewUpdate(data) {
+    var url = PathUtil.dictionaries() + '/pop/edit_dictionary?id=' + data.id;
+    BootstrapModalUtil.openWin("#_base_template", url);
+};
 
 function viewRemove(row) {
     POP_UP_Util.remove(function () {
@@ -92,7 +92,7 @@ var DictionaryTableUtil = {
      * Date: 2019/3/1 11:34<br>
      */
     dictSearch: function () {
-        DictionaryTableUtil.getdictChildList(serializeObject($("#_dictFormSearch")));
+        DictionaryTableUtil.getdictChildList(JsonUtil.serializeObject($("#_dictFormSearch")));
     }
 };
 
@@ -113,16 +113,21 @@ $(function () {
 
 
     /**
-     * Title: 获取当前选中Table的行的下标<br>
+     * Title: 新增数据字典页面<br>
      * Description: <br>
      * Author: XiaChong<br>
-     * Date: 2018/8/14 10:07<br>
-
-     $('#_dictionary_table').on("click-row.bs.table", function (e, row, $element) {
-            tableIndex = $element.data('index');
-        });
-
+     * Date: 2019/3/5 14:18<br>
      */
+    $("#_addDictionary").on("click", function () {
+        var jsonData = BootstrapTableUtil.getPitchOnTableData($('#_dictionary_table'));
+        console.info(jsonData);
+        if (JsonUtil.isEmptyObject(jsonData)) {
+            var url = PathUtil.dictionaries() + '/pop/add_dictionary?parentId=' + jsonData.id;
+            BootstrapModalUtil.openWin("#_base_template", url);
+        } else {
+            parent.layer.msg('请选择一项作为父节点 . ', {icon: 6});
+        }
+    });
 
     /**
      * Title: 移除模态框<br>
@@ -132,7 +137,7 @@ $(function () {
      * Author: XiaChong<br>
      * Date: 2018/8/13 19:15<br>
      */
-    $("#_pop_add_v_edit_dictionary").on("hidden.bs.modal", function () {
+    $("#_base_template").on("hidden.bs.modal", function () {
         $(this).removeData("bs.modal");
         $(this).find(".modal-content").children().remove();
     });
