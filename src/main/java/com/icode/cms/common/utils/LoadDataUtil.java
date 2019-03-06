@@ -22,6 +22,7 @@ import java.util.stream.Stream;
  * Title: 加载内存数据字典<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/2/28 17:25<br>
  */
 public class LoadDataUtil {
@@ -47,6 +48,7 @@ public class LoadDataUtil {
      * Title: 加载字典进内存<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 15:50<br>
      */
     public static void buildLocalCache(List<CmsDictionary> listDictionary) {
@@ -71,6 +73,7 @@ public class LoadDataUtil {
      * Title: 清空数据<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 15:52<br>
      */
     private static void clearMap() {
@@ -89,6 +92,7 @@ public class LoadDataUtil {
      * Title: 获取所有字典数据<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 16:42<br>
      */
     public static List<CmsDictionary> getAllDictionary() {
@@ -99,6 +103,7 @@ public class LoadDataUtil {
      * Title: 根据key获取字典id<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 16:42<br>
      */
     public static Integer getDicIdByKey(String key) throws NullPointerException {
@@ -118,6 +123,7 @@ public class LoadDataUtil {
      * Title: 根据key获取字典数据<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 16:42<br>
      */
     public static CmsDictionary getDicDataByKey(String key) throws NullPointerException {
@@ -128,6 +134,7 @@ public class LoadDataUtil {
      * Title: 根据id获取字典数据<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 16:42<br>
      */
     public static CmsDictionary getDicDataById(Integer id) throws NullPointerException {
@@ -155,9 +162,8 @@ public class LoadDataUtil {
      * Title: 根据key获取子节点<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 16:52<br>
-     * Param: <br>
-     * Return:
      */
     public static List<CmsDictionary> getDicChildByKey(String key) throws NullPointerException {
         r.lock();
@@ -172,9 +178,8 @@ public class LoadDataUtil {
      * Title: 根据Id获取子节点<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 16:52<br>
-     * Param: <br>
-     * Return:
      */
     public static List<CmsDictionary> getDicChildById(Integer id) throws NullPointerException {
         r.lock();
@@ -189,6 +194,7 @@ public class LoadDataUtil {
      * Title: 查找子节点<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 10:18<br>
      */
     public static List<CmsDictionary> getDicChild(CmsDictionary cmsDictionary) {
@@ -199,6 +205,7 @@ public class LoadDataUtil {
      * Title: 初始化字典数据<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 16:20<br>
      */
     public static List<CmsDictionary> initDictionary(ICmsDictionaryService cmsDictionaryService) {

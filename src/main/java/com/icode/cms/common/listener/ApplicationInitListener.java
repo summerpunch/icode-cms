@@ -10,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * Title: ApplicationInitListener监听器<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/2/28 17:17<br>
  */
 public class ApplicationInitListener implements ApplicationListener<ApplicationReadyEvent> {

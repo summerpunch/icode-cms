@@ -26,6 +26,7 @@ var DictionaryTableUtil = {
      * Title: 获取字典树结构树<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 11:33<br>
      */
     getDictionaryTree: function () {
@@ -50,6 +51,7 @@ var DictionaryTableUtil = {
      * Title: 查询数据字典列表<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 11:31<br>
      */
     getdictChildList: function (params) {
@@ -89,6 +91,7 @@ var DictionaryTableUtil = {
      * Title: 按条件查询<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 11:34<br>
      */
     dictSearch: function () {
@@ -105,6 +108,7 @@ $(function () {
      * Title: 点击字典树节点<br>
      * Description: 按当前节点查询所属字典<br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 11:56<br>
      */
     $('#_dictJson').on('nodeSelected', function (event, data) {
@@ -135,7 +139,8 @@ $(function () {
      *              由于移除缓存时加载到<div class="modal-content"></div>未移除的数据<
      *              手动移除加载的内容br>
      * Author: XiaChong<br>
-     * Date: 2018/8/13 19:15<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/5 14:18<br>
      */
     $("#_base_template").on("hidden.bs.modal", function () {
         $(this).removeData("bs.modal");

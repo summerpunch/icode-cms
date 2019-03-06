@@ -14,6 +14,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
  * Title: 全局异常捕获<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/2/27 17:59<br>
  */
 @ResponseBody
@@ -26,6 +27,7 @@ public class GlobalExceptionHandler {
      * Title: 空指针异常<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/27 17:44<br>
      */
     @ExceptionHandler(value = NullPointerException.class)
@@ -42,6 +44,7 @@ public class GlobalExceptionHandler {
      * Title: 方法参数校验异常<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/27 17:44<br>
      */
     @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
@@ -58,6 +61,7 @@ public class GlobalExceptionHandler {
      * Title: 其他异常<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/27 17:45<br>
      */
     @ExceptionHandler(value = Exception.class)

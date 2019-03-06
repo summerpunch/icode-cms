@@ -4,7 +4,8 @@ package com.icode.cms.common.constant;
  * Title: 页面路径相关常量<br>
  * Description: <br>
  * Author: XiaChong<br>
- * Date: 2018/8/13 18:56<br>
+ * Mail: summerpunch@163.com<br>
+ * Date: 2019/3/6 10:03<br>
  */
 public class PathFinal {
 

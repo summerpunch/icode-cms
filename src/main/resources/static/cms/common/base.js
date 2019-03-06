@@ -11,6 +11,7 @@ var BootstrapTableUtil = {
      * Title: 请求成功方法<br>
      * Description: 渲染Table<br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:45<br>
      */
     responseHandler: function (result) {
@@ -24,6 +25,7 @@ var BootstrapTableUtil = {
      * Title: 获取ajax分页options设置<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 13:27<br>
      */
     getAjaxPagingOptions: function (settings) {
@@ -66,6 +68,7 @@ var BootstrapTableUtil = {
      * Title: 获取table数据<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 13:27<br>
      */
     getDataTable: function (settings) {
@@ -85,6 +88,7 @@ var BootstrapTableUtil = {
      * Title: 返回Table操作类型<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:34<br>
      */
     actionFormatter: function (value, row, index) {
@@ -99,6 +103,7 @@ var BootstrapTableUtil = {
      * Title: 刷新BootstrapTable<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:50<br>
      */
     refreshBootstrapTable: function (_this) {
@@ -109,6 +114,7 @@ var BootstrapTableUtil = {
      * Title: 获取选中的数据<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 13:55<br>
      */
     getPitchOnTableData: function (_this) {
@@ -122,6 +128,7 @@ var BootstrapTreeUtil = {
      * Title: 删除刷新Tree<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:51<br>
      */
     refreshRemoveTreeview: function (_this, row) {
@@ -138,6 +145,7 @@ var BootstrapTreeUtil = {
      * Title: 更新后刷新<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 19:34<br>
      */
     refreshEditTreeview: function (_this, json) {
@@ -154,6 +162,7 @@ var BootstrapTreeUtil = {
      * Title: 新增后刷新<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 19:34<br>
      */
     refreshAddTreeview: function (_this, json) {
@@ -181,6 +190,7 @@ var BootstrapModalUtil = {
      * Title: Bootstrap手动验证表单<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 17:22<br>
      */
     fromValid: function (_this) {
@@ -202,6 +212,7 @@ var BootstrapModalUtil = {
  * Title: 路径<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/3/2 10:12<br>
  */
 var PathUtil = {
@@ -214,6 +225,7 @@ var PathUtil = {
  * Title: 弹窗(删除提示)<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/3/2 10:12<br>
  */
 var POP_UP_Util = {
@@ -244,6 +256,7 @@ var POP_UP_Util = {
  * Title: 提示<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/3/2 10:12<br>
  */
 var ToastOptionsUtil = {
@@ -263,6 +276,7 @@ var ToastOptionsUtil = {
  * Title: http请求<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/3/2 10:12<br>
  */
 var HttpUtil = {
@@ -270,6 +284,7 @@ var HttpUtil = {
      * Title: 同步请求<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/2 10:04<br>
      */
     ajaxSynchronizationRequest: function (url, params, callback) {
@@ -293,6 +308,7 @@ var HttpUtil = {
      * Title: 异步请求<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/2 10:04<br>
      */
     ajaxAsynchronizationRequest: function (url, params, callback) {
@@ -316,6 +332,7 @@ var HttpUtil = {
  * Title: JSON<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/3/2 10:12<br>
  */
 var JsonUtil = {
@@ -323,6 +340,7 @@ var JsonUtil = {
      * Title: 验证json对象是否为空<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 13:58<br>
      */
     isEmptyObject: function (e) {
@@ -337,6 +355,7 @@ var JsonUtil = {
      * Title: 序列化表单为JSON对象<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 14:28<br>
      */
     serializeObject: function (_this) {
@@ -360,6 +379,7 @@ var JsonUtil = {
  * Title: 清除<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/3/5 19:36<br>
  */
 var ClearUtil = {
@@ -368,6 +388,7 @@ var ClearUtil = {
      * Title: 清空搜索条件<br>
      * Description: 这种方式虽然可以重置表单，但是不能重置隐藏字段。隐藏字段要单独处理<br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 17:21<br>
      */
     fromClears: function (id) {
@@ -379,6 +400,7 @@ var ClearUtil = {
  * Title: 实体类工具类<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/3/5 19:40<br>
  */
 var EntityUtil = {
@@ -387,6 +409,7 @@ var EntityUtil = {
      * Title: BootstrapTree新增修改删除Json工具类<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 19:38<br>
      */
     dictTreeJson: function (json) {

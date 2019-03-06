@@ -7,7 +7,8 @@ import lombok.Data;
  * Title: Table响应实体类<br>
  * Description: <br>
  * Author: XiaChong<br>
- * Date: 2018/8/13 19:12<br>
+ * Mail: summerpunch@163.com<br>
+ * Date: 2019/3/6 10:04<br>
  */
 @Data
 public class ResponseDataTable {

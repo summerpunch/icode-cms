@@ -27,6 +27,7 @@ public class DictionaryClientHandle {
      * Title: 加载字典进内存<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 15:54<br>
      */
     public String loadDictionaryFromDB(ConfigurableApplicationContext applicationContext) {

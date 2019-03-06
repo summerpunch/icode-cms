@@ -6,6 +6,7 @@ $(function () {
      * Title: 保存<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 17:13<br>
      */
     $("#_saveDict").on("click", function () {
@@ -28,6 +29,7 @@ $(function () {
  * Title: 表单验证<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2019/3/5 19:48<br>
  */
 function formValidator() {

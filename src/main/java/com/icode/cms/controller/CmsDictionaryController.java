@@ -22,12 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
- * <p>
- * 数据字典 前端控制器
- * </p>
- *
- * @author xiachong
- * @since 2018-07-08
+ * Title: 数据字典 前端控制器<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
+ * Date: 2019/3/6 9:41<br>
  */
 @Controller
 @RequestMapping("/cms/dictionary")
@@ -42,6 +41,7 @@ public class CmsDictionaryController {
      * Title: 跳转首页<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 11:17<br>
      */
     @RequestMapping("/pop/idx")
@@ -53,6 +53,7 @@ public class CmsDictionaryController {
      * Title: 获取数据字典结构树<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 11:17<br>
      */
     @RequestMapping(value = "ajax/dictionary/tree", produces = "application/json")
@@ -66,6 +67,7 @@ public class CmsDictionaryController {
      * Title: 按条件查询数据字典列表<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 11:17<br>
      */
     @RequestMapping(value = "/get/dictionaryList")
@@ -78,6 +80,7 @@ public class CmsDictionaryController {
      * Title: 根据id删除<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:55<br>
      */
     @RequestMapping("/remove/dictionaryById")
@@ -91,6 +94,7 @@ public class CmsDictionaryController {
      * Title: 新增弹窗<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 14:01<br>
      */
     @RequestMapping("/pop/add_dictionary")
@@ -105,6 +109,7 @@ public class CmsDictionaryController {
      * Title: 编辑弹窗<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 14:03<br>
      */
     @RequestMapping("/pop/edit_dictionary")
@@ -121,6 +126,7 @@ public class CmsDictionaryController {
      * Title: 新增or编辑保存<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 14:07<br>
      */
     @RequestMapping("/do/save_v_update_dictionary")
@@ -137,6 +143,7 @@ public class CmsDictionaryController {
      * Title: 校验数据唯一性<br>
      * Description: itemKey<br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 14:31<br>
      */
     @ResponseBody

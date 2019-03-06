@@ -10,12 +10,11 @@ import com.icode.cms.repository.qo.CmsDictionaryQo;
 import com.icode.cms.repository.vo.CmsDictionaryVO;
 
 /**
- * <p>
- * 数据字典 服务类
- * </p>
- *
- * @author xiachong
- * @since 2018-07-08
+ * Title: 数据字典 服务类<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
+ * Date: 2019/3/6 9:42<br>
  */
 public interface ICmsDictionaryService extends IService<CmsDictionary> {
 
@@ -23,6 +22,7 @@ public interface ICmsDictionaryService extends IService<CmsDictionary> {
      * Title: 获取数据字典结构树<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 11:18<br>
      */
     ResponseData getDictionaryTree();
@@ -32,6 +32,7 @@ public interface ICmsDictionaryService extends IService<CmsDictionary> {
      * Title: 按条件查询数据字典列表<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:57<br>
      */
     Page<CmsDictionaryDto> getDictionaryList(CmsDictionaryQo qo);
@@ -40,6 +41,7 @@ public interface ICmsDictionaryService extends IService<CmsDictionary> {
      * Title: 根据id删除<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:57<br>
      */
     ResponseData removeDictionaryById(Integer id);
@@ -48,6 +50,7 @@ public interface ICmsDictionaryService extends IService<CmsDictionary> {
      * Title: 新增or编辑保存<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 14:14<br>
      */
     ResponseData saveOrUpdateDictionary(CmsDictionaryVO vo);
@@ -56,6 +59,7 @@ public interface ICmsDictionaryService extends IService<CmsDictionary> {
      * Title: 校验数据唯一性<br>
      * Description: itemKey<br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 14:31<br>
      */
     ResponseVerifyData uniquenessDictionary(Integer id, String itemKey, String fields);

@@ -8,6 +8,7 @@ import java.util.List;
  * Title: 请求响应工具类<br>
  * Description: <br>
  * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
  * Date: 2018/8/13 19:18<br>
  */
 public class ResponseUtil {
@@ -16,6 +17,7 @@ public class ResponseUtil {
      * Title: 请求成功，并定制返回消息<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2018/8/13 18:43<br>
      */
     public static ResponseData success(Object data, String msg) {
@@ -32,6 +34,7 @@ public class ResponseUtil {
      * Title: 请求成功,默认返回消息为 ok<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2018/8/13 18:43<br>
      */
     public static ResponseData success(Object data) {
@@ -48,6 +51,7 @@ public class ResponseUtil {
      * Title: 参数校验异常<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2018/8/13 18:43<br>
      */
     public static ResponseData paramInvalidError(String message) {
@@ -63,6 +67,7 @@ public class ResponseUtil {
      * Title: 参数校验异常<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2018/8/13 18:43<br>
      */
     public static ResponseData paramInvalidError(List<FieldError> errors) {
@@ -89,6 +94,7 @@ public class ResponseUtil {
      * Title: 业务异常<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2018/8/13 18:43<br>
      */
     public static ResponseData businessError(String message) {
@@ -104,6 +110,7 @@ public class ResponseUtil {
      * Title: 唯一校验<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2018/8/13 18:43<br>
      */
     public static ResponseData uniquenessError(String message) {

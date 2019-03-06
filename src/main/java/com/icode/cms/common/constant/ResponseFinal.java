@@ -1,9 +1,11 @@
 package com.icode.cms.common.constant;
+
 /**
  * Title: 响应相关常量<br>
  * Description: <br>
  * Author: XiaChong<br>
- * Date: 2018/8/13 19:02<br>
+ * Mail: summerpunch@163.com<br>
+ * Date: 2019/3/6 10:03<br>
  */
 public class ResponseFinal {
 

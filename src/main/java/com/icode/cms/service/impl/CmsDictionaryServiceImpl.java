@@ -3,6 +3,7 @@ package com.icode.cms.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.icode.cms.common.constant.DbFinal;
 import com.icode.cms.common.constant.ResponseFinal;
 import com.icode.cms.common.response.ResponseData;
 import com.icode.cms.common.response.ResponseUtil;
@@ -26,22 +27,22 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 /**
- * <p>
- * 数据字典 服务实现类
- * </p>
- *
- * @author xiachong
- * @since 2018-07-08
+ * Title: 数据字典 服务实现类<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
+ * Date: 2019/3/6 9:53<br>
  */
 @Service
 public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, CmsDictionary> implements ICmsDictionaryService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CmsDictionaryServiceImpl.class);
 
-    private List<CmsDictionary> removeDictionaryList = new ArrayList<>();
-
     @Autowired
     private ICmsDictionaryService service;
+
+    //保存已经添加进tree的数据
+    private List<CmsDictionary> removeDictionaryList = new ArrayList<>();
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -84,16 +85,16 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
             LOGGER.error("saveOrUpdateDictionary,err--{}", e);
             return ResponseUtil.businessError(ResponseFinal.SAVE_COME_TO_NOTHING);
         }
-        return null;
+        return ResponseUtil.success(null, ResponseFinal.SAVE_COME_TO_NOTHING);
     }
 
     @Override
     public ResponseVerifyData uniquenessDictionary(Integer id, String itemKey, String fields) {
         ResponseVerifyData responseVerifyData = new ResponseVerifyData();
         EntityWrapper<CmsDictionary> wrapper = new EntityWrapper();
-        wrapper.eq("item_key", itemKey.trim());
+        wrapper.eq(DbFinal.DICT_COLUMN_ITEM_KEY, itemKey.trim());
         if (id != null) {
-            wrapper.notIn("id", id);
+            wrapper.notIn(DbFinal.DICT_COLUMN_ID, id);
         }
         int i = selectCount(wrapper);
         if (i > 0) {
@@ -110,15 +111,15 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
         EntityWrapper<CmsDictionary> entityWrapper = new EntityWrapper<>();
 
         if (qo.getId() != null) {
-            entityWrapper.eq("parent_id", qo.getId());
+            entityWrapper.eq(DbFinal.DICT_COLUMN_PARENT_ID, qo.getId());
         }
 
         if (qo.getStatus() != null) {
-            entityWrapper.eq("status", qo.getStatus());
+            entityWrapper.eq(DbFinal.DICT_COLUMN_STATUS, qo.getStatus());
         }
 
         if (StringUtils.isNotBlank(qo.getItemNamecn())) {
-            entityWrapper.like("item_namecn", qo.getItemNamecn());
+            entityWrapper.like(DbFinal.DICT_COLUMN_ITEM_NAMECN, qo.getItemNamecn());
         }
 
         List<CmsDictionaryDto> resourceDTO = new ArrayList<>();
@@ -141,7 +142,8 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
     public ResponseData getDictionaryTree() {
         List<CmsDictionary> listNodes = LoadDataUtil.getAllDictionary();
         if (listNodes.isEmpty()) {
-            return ResponseUtil.success(getTree(LoadDataUtil.initDictionary(service)));
+            List<CmsDictionary> list = LoadDataUtil.initDictionary(service);
+            return ResponseUtil.success(getTree(list));
         }
         return ResponseUtil.success(getTree(listNodes));
     }
@@ -174,6 +176,7 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
      * Title: 递归查询子节点<br>
      * Description: <br>
      * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 10:53<br>
      */
     private DictionaryTreeNode facadeTree(CmsDictionary cmsDictionary) {
