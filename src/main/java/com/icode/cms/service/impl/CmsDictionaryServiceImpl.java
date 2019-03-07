@@ -46,17 +46,18 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ResponseData removeDictionaryById(Integer id) {
-        CmsDictionary dictionary = selectById(id);
-        if (dictionary != null) {
-            if (deleteById(id)) {
+    public ResponseData removeDictionaryById(Integer[] ids) {
+        try {
+            boolean flag = deleteBatchIds(Arrays.asList(ids));
+            if (flag) {
                 LoadDataUtil.initDictionary(service);
                 return ResponseUtil.success(null, ResponseFinal.DELETE_OK);
             } else {
                 return ResponseUtil.success(null, ResponseFinal.DELETE_COME_TO_NOTHING);
             }
-        } else {
-            return ResponseUtil.success(null, ResponseFinal.DATA_DOES_NOT_EXIST);
+        } catch (Exception e) {
+            LOGGER.error("removeDictionaryById,err--{}", e);
+            return ResponseUtil.businessError(ResponseFinal.ERROR);
         }
     }
 

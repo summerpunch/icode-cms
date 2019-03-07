@@ -24,4 +24,6 @@ public class ResponseFinal {
     public static final String DELETE_COME_TO_NOTHING = "删除失败";
 
     public static final String DATA_DOES_NOT_EXIST = "当前数据不存在";
+
+    public static final String ERROR = "业务错误";
 }

@@ -44,7 +44,7 @@ public interface ICmsDictionaryService extends IService<CmsDictionary> {
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:57<br>
      */
-    ResponseData removeDictionaryById(Integer id);
+    ResponseData removeDictionaryById(Integer[] ids);
 
     /**
      * Title: 新增or编辑保存<br>

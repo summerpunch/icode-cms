@@ -11,10 +11,10 @@ function viewUpdate(data) {
 function viewRemove(row) {
     POP_UP_Util.remove(function () {
             var url = PathUtil.dictionaries() + '/remove/dictionaryById';
-            var params = {id: row.id};
+            var params = {ids: ArrayUtil.transformArray(row)};
             HttpUtil.ajaxAsynchronizationRequest(url, params, function () {
                 BootstrapTableUtil.refreshBootstrapTable($("#_dictionary_table"));
-                BootstrapTreeUtil.refreshRemoveTreeview($('#_dictJson'), row);
+                BootstrapTreeUtil.refreshRemoveTreeview($('#_dictJson'), ArrayUtil.transformArray(row));
             });
         }
     );
@@ -118,15 +118,31 @@ $(function () {
      * Date: 2019/3/5 14:18<br>
      */
     $("#_addDictionary").on("click", function () {
-        var jsonData = BootstrapTableUtil.getPitchOnTableData($('#_dictionary_table'));
-        console.info(jsonData);
-        if (JsonUtil.isEmptyObject(jsonData)) {
-            var url = PathUtil.dictionaries() + '/pop/add_dictionary?parentId=' + jsonData.id;
+        var data = BootstrapTableUtil.getChooseTableDataMulti($('#_dictionary_table'));
+        if (data.length == 1) {
+            var url = PathUtil.dictionaries() + '/pop/add_dictionary?parentId=' + data[0].id;
             BootstrapModalUtil.openBaseTemplate(url);
         } else {
-            parent.layer.msg('请选择一项作为父节点 . ', {icon: 6});
+            parent.layer.msg('请仅选择一项作为父节点 . ', {icon: 6});
         }
     });
+
+    /**
+     * Title: 批量删除<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/7 19:38<br>
+     */
+    $("#_delDictionary").on("click", function () {
+        var data = BootstrapTableUtil.getChooseTableDataMulti($('#_dictionary_table'));
+        if (data.length > 0) {
+            viewRemove(data);
+        } else {
+            parent.layer.msg('请选择需要删除的节点 . ', {icon: 6});
+        }
+    });
+
 
     BootstrapModalUtil.removeData();
 });

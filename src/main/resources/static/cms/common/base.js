@@ -36,8 +36,8 @@ var BootstrapTableUtil = {
             contentType: "application/x-www-form-urlencoded",//必须要有！！！！
             toolbar: '#exampleToolbar',//可以在table上方显示的一条工具栏，
             iconSize: 'outline',
-            singleSelect: true,//单选
-            clickToSelect: true,//是否启用点击选中行
+            singleSelect: false,//单选
+            clickToSelect: false,//是否启用点击选中行
             data_local: "zh-US",//表格汉化
             pageSize: 5,//如果设置了分页，页面数据条数
             pageList: [5, 10, 20],	//如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录
@@ -112,13 +112,23 @@ var BootstrapTableUtil = {
 
     /**
      * Title: 获取选中的数据<br>
-     * Description: <br>
+     * Description: 单选情况下<br>
      * Author: XiaChong<br>
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 13:55<br>
      */
-    getPitchOnTableData: function (_this) {
+    getChooseTableDataOne: function (_this) {
         return _this.bootstrapTable('getSelections')[0];
+    },
+    /**
+     * Title: 获取选中的数据<br>
+     * Description: 多选<br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/7 19:43<br>
+     */
+    getChooseTableDataMulti: function (_this) {
+        return _this.bootstrapTable('getSelections');
     }
 };
 
@@ -126,19 +136,23 @@ var BootstrapTableUtil = {
 var BootstrapTreeUtil = {
     /**
      * Title: 删除刷新Tree<br>
-     * Description: <br>
+     * Description: 接收数组id<br>
      * Author: XiaChong<br>
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:51<br>
      */
-    refreshRemoveTreeview: function (_this, row) {
+    refreshRemoveTreeview: function (_this, arr) {
         var node = _this.treeview('getSelected');
         var nodes = node[0].nodes;
-        $.each(nodes, function (index, obj) {
-            if (obj.id == row.id) {
-                _this.treeview('removeNode', [obj, {silent: true}]);
-                return false;
-            }
+        $.each(arr, function (idx, o) {
+            $.each(nodes, function (index, obj) {
+                if (o == obj.id) {
+                    _this.treeview('removeNode', [obj, {silent: true}]);
+                    if (arr.length == (idx + 1)) {
+                        return false;
+                    }
+                }
+            });
         });
     },
     /**
@@ -503,5 +517,29 @@ var EntityUtil = {
         }
     }
 };
+
+var ArrayUtil = {
+
+    /**
+     * Title: 将数组或对象转为数据<br>
+     * Description: 返回id数组<br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/7 19:55<br>
+     */
+    transformArray: function (data) {
+        var arr = new Array();
+        if (Array.isArray(data)) {
+            $.each(data, (index, value) => {
+                arr.push(value.id);
+            });
+        } else {
+            arr.push(data.id);
+        }
+        return arr;
+    }
+};
+
+
 
 
