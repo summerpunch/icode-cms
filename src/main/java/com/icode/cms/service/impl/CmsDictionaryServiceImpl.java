@@ -89,7 +89,7 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
     }
 
     @Override
-    public ResponseVerifyData uniquenessDictionary(Integer id, String itemKey, String fields) {
+    public ResponseVerifyData uniquenessDictionary(Integer id, String itemKey) {
         ResponseVerifyData responseVerifyData = new ResponseVerifyData();
         EntityWrapper<CmsDictionary> wrapper = new EntityWrapper();
         wrapper.eq(DbFinal.DICT_COLUMN_ITEM_KEY, itemKey.trim());

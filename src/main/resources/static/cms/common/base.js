@@ -175,17 +175,82 @@ var BootstrapTreeUtil = {
             }
         });
     },
+    /**
+     * Title: 渲染tree<br>
+     * Description: 不显示单选<br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/7 14:29<br>
+     */
+    showTreeview: function (id, json) {
+        $(id).treeview({
+            data: json,
+            levels: 2,
+            showCheckbox: false,//不显示单选
+        });
+        $("#1").click();
+    },
+    /**
+     * Title: 渲染tree<br>
+     * Description: 显示单选<br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/7 14:29<br>
+     */
+    showTreeviewNoCheckbox: function (id, json) {
+        $(id).treeview({
+            data: json,
+            levels: 2,
+            showCheckbox: true,
+        });
+    },
 };
 
 //处理BootstrapModal的公共方法
 var BootstrapModalUtil = {
-    openWin: function (id, url) {
-        $(id).modal({
+    /**
+     * Title: 基础模板中<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/7 14:45<br>
+     */
+    openBaseTemplate: function (url) {
+        $("#_base_template").modal({
             remote: url,
             backdrop: "static",
             keyboard: true,
         })
     },
+    /**
+     * Title: 基础模板大<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/7 14:45<br>
+     */
+    openBaseTemplateWinMax: function (url) {
+        $("#_base_template_max").modal({
+            remote: url,
+            backdrop: "static",
+            keyboard: true,
+        })
+    },
+    /**
+     * Title: 基础模板小<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/7 14:44<br>
+     */
+    openBaseTemplateWinMin: function (url) {
+        $("#_base_template_min").modal({
+            remote: url,
+            backdrop: "static",
+            keyboard: true,
+        })
+    },
+
     /**
      * Title: Bootstrap手动验证表单<br>
      * Description: <br>
@@ -198,6 +263,24 @@ var BootstrapModalUtil = {
         _this.data('bootstrapValidator').validate();
         //验证是否通过true/false
         return _this.data('bootstrapValidator').isValid();
+    },
+    /**
+     * Title: 移除模态框<br>
+     * Description:
+     *
+     * modal页面加载$()错误,
+     * 由于移除缓存时加载到<div class="modal-content"></div>未移除的数据
+     * 手动移除加载的内容br>
+     *
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/5 14:18<br>
+     */
+    removeData: function () {
+        $(".modal").on("hidden.bs.modal", function () {
+            $(this).removeData("bs.modal");
+            $(this).find(".modal-content").children().remove();
+        });
     }
 };
 

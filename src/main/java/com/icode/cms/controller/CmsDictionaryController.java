@@ -148,8 +148,8 @@ public class CmsDictionaryController {
      */
     @ResponseBody
     @RequestMapping("/get/uniqueness_dictionary")
-    public ResponseVerifyData uniquenessDictionary(Integer id, String itemKey, String fields) {
-        return service.uniquenessDictionary(id, itemKey, fields);
+    public ResponseVerifyData uniquenessDictionary(Integer id, String itemKey) {
+        return service.uniquenessDictionary(id, itemKey);
     }
 }
 

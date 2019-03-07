@@ -76,7 +76,6 @@ function formValidator() {
                         data: {
                             id: $('#_id').val(),
                             itemKey: $('#itemKey').val(),
-                            fields: 'itemKey',
                         },
                     },
                 }

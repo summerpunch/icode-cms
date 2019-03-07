@@ -5,7 +5,7 @@ function viewSearch(id) {
 
 function viewUpdate(data) {
     var url = PathUtil.dictionaries() + '/pop/edit_dictionary?id=' + data.id;
-    BootstrapModalUtil.openWin("#_base_template", url);
+    BootstrapModalUtil.openBaseTemplate(url);
 };
 
 function viewRemove(row) {
@@ -30,20 +30,14 @@ var DictionaryTableUtil = {
      * Date: 2019/3/1 11:33<br>
      */
     getDictionaryTree: function () {
-        var json = new Array();
         $.ajax({
             type: 'POST',
             url: PathUtil.dictionaries() + '/ajax/dictionary/tree',
             async: false,
             dataType: 'json',
             success: function (data) {
-                json = data.data;
+                BootstrapTreeUtil.showTreeview('#_dictJson', data.data);
             }
-        });
-        $('#_dictJson').treeview({
-            data: json,
-            levels: 2,
-            showCheckbox: false, //不显示单选
         });
     },
 
@@ -102,6 +96,7 @@ var DictionaryTableUtil = {
 
 $(function () {
     DictionaryTableUtil.getDictionaryTree();
+
     DictionaryTableUtil.getdictChildList({id: 1});
 
     /**
@@ -127,24 +122,12 @@ $(function () {
         console.info(jsonData);
         if (JsonUtil.isEmptyObject(jsonData)) {
             var url = PathUtil.dictionaries() + '/pop/add_dictionary?parentId=' + jsonData.id;
-            BootstrapModalUtil.openWin("#_base_template", url);
+            BootstrapModalUtil.openBaseTemplate(url);
         } else {
             parent.layer.msg('请选择一项作为父节点 . ', {icon: 6});
         }
     });
 
-    /**
-     * Title: 移除模态框<br>
-     * Description: modal页面加载$()错误,
-     *              由于移除缓存时加载到<div class="modal-content"></div>未移除的数据<
-     *              手动移除加载的内容br>
-     * Author: XiaChong<br>
-     * Mail: summerpunch@163.com<br>
-     * Date: 2019/3/5 14:18<br>
-     */
-    $("#_base_template").on("hidden.bs.modal", function () {
-        $(this).removeData("bs.modal");
-        $(this).find(".modal-content").children().remove();
-    });
+    BootstrapModalUtil.removeData();
 });
 

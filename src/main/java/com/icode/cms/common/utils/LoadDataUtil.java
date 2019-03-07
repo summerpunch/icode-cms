@@ -27,7 +27,7 @@ import java.util.stream.Stream;
  */
 public class LoadDataUtil {
 
-    private static Logger log = LoggerFactory.getLogger(LoadDataUtil.class);
+    private static final Logger Logger = LoggerFactory.getLogger(LoadDataUtil.class);
 
     private static final Map<String, CmsDictionary> KEY_MAP = new HashMap<>();
 
@@ -146,13 +146,13 @@ public class LoadDataUtil {
         if (StringUtils.isNotBlank(key)) {
             vo = KEY_MAP.get(key);
             if (null == vo) {
-                log.error("--------------no dictionary-----------{}", key);
+                Logger.error("--------------no dictionary-----------{}", key);
             }
         }
         if (null != id) {
             vo = ID_MAP.get(id);
             if (null == vo) {
-                log.error("--------------no dictionary-----------{}", id);
+                Logger.error("--------------no dictionary-----------{}", id);
             }
         }
         return vo;
@@ -168,7 +168,11 @@ public class LoadDataUtil {
     public static List<CmsDictionary> getDicChildByKey(String key) throws NullPointerException {
         r.lock();
         try {
-            return getDicDataByKey(key) == null ? null : getDicChild(getDicDataByKey(key));
+            CmsDictionary dicDataByKey = getDicDataByKey(key);
+            if (dicDataByKey == null) {
+                return null;
+            }
+            return getDicChild(dicDataByKey);
         } finally {
             r.unlock();
         }
@@ -184,7 +188,11 @@ public class LoadDataUtil {
     public static List<CmsDictionary> getDicChildById(Integer id) throws NullPointerException {
         r.lock();
         try {
-            return getDicDataById(id) == null ? null : getDicChild(getDicDataById(id));
+            CmsDictionary cmsDictionary = getDicDataById(id);
+            if (cmsDictionary == null) {
+                return null;
+            }
+            return getDicChild(cmsDictionary);
         } finally {
             r.unlock();
         }

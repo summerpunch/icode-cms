@@ -62,5 +62,5 @@ public interface ICmsDictionaryService extends IService<CmsDictionary> {
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 14:31<br>
      */
-    ResponseVerifyData uniquenessDictionary(Integer id, String itemKey, String fields);
+    ResponseVerifyData uniquenessDictionary(Integer id, String itemKey);
 }
