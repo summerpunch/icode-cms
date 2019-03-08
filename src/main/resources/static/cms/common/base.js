@@ -167,15 +167,17 @@ var BootstrapTreeUtil = {
      */
     refreshRemoveTreeview: function (arr) {
         var nodes = BootstrapTreeUtil.treeChooseChildArray;
-        $.each(arr, function (idx, o) {
-            $.each(nodes, function (index, obj) {
-                if (o == obj.id) {
-                    BootstrapTreeUtil.treeDom.treeview('removeNode', [obj, {silent: true}]);
-                    if (arr.length == (idx + 1)) {
-                        return false;
-                    }
+        var treeArr = new Array();
+        $.each(nodes, function (index, obj) {
+            if (arr.indexOf(obj.id) > -1) {
+                treeArr.push(obj);
+                if ((arr.length) === (treeArr.length)) {
+                    $.each(treeArr, function (idx, o) {
+                        BootstrapTreeUtil.treeDom.treeview('removeNode', [o, {silent: true}]);
+                    });
+                    return false;
                 }
-            });
+            }
         });
     },
     /**
