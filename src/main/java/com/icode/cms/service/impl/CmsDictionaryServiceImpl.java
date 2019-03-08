@@ -24,7 +24,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Title: 数据字典 服务实现类<br>
@@ -40,9 +43,6 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
 
     @Autowired
     private ICmsDictionaryService service;
-
-    //保存已经添加进tree的数据
-    private List<CmsDictionary> removeDictionaryList = new ArrayList<>();
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -151,51 +151,12 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
 
     private List<DictionaryTreeNode> getTree(List<CmsDictionary> listNodes) {
         List<DictionaryTreeNode> rootList = new ArrayList<>();
-        List<DictionaryTreeNode> nodes = new ArrayList<>();
         DictionaryTreeNode root = new DictionaryTreeNode();
         if (!listNodes.isEmpty()) {
-            if (!removeDictionaryList.isEmpty()) {
-                removeDictionaryList.clear();
-            }
-            listNodes.stream().filter(cd -> !removeDictionaryList.contains(cd)).forEach(cd -> {
-                if (cd.getParentId() == 0) {
-                    root.setId(cd.getId());
-                    root.setParentId(cd.getParentId());
-                    root.setText(cd.getItemNamecn());
-                } else {
-                    nodes.add(facadeTree(cd));
-                }
-            });
-            root.setNodes(nodes);
+            listNodes.parallelStream().forEachOrdered(n -> root.setTreeNode(n));
         }
         rootList.add(root);
         return rootList;
     }
 
-
-    /**
-     * Title: 递归查询子节点<br>
-     * Description: <br>
-     * Author: XiaChong<br>
-     * Mail: summerpunch@163.com<br>
-     * Date: 2019/2/28 10:53<br>
-     */
-    private DictionaryTreeNode facadeTree(CmsDictionary cmsDictionary) {
-        DictionaryTreeNode node = new DictionaryTreeNode();
-        List<DictionaryTreeNode> nodeList = new ArrayList<>();
-        if (cmsDictionary != null) {
-            List<CmsDictionary> lists = LoadDataUtil.getDicChild(cmsDictionary);
-            if (!lists.isEmpty()) {
-                for (CmsDictionary data : lists) {
-                    nodeList.add(facadeTree(data));
-                    node.setNodes(nodeList);
-                    removeDictionaryList.add(data);
-                }
-            }
-            node.setId(cmsDictionary.getId());
-            node.setParentId(cmsDictionary.getParentId());
-            node.setText(cmsDictionary.getItemNamecn());
-        }
-        return node;
-    }
 }
