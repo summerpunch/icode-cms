@@ -227,4 +227,14 @@ public class LoadDataUtil {
         }
         return null;
     }
+    /**
+     * Title: 获取并行流<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/8 13:19<br>
+     */
+    public static Supplier<Stream<CmsDictionary>> getParallelStream(){
+       return PARALLEL_STREAM;
+    }
 }

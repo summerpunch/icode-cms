@@ -71,7 +71,7 @@ var DictionaryTableUtil = {
                 title: '状态'
             }, {
                 field: 'id',
-                title: '删除',
+                title: '操作',
                 width: 100,
                 align: 'center',
                 valign: 'middle',
