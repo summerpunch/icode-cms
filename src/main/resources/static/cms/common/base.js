@@ -576,7 +576,19 @@ var ArrayUtil = {
             arr.push(data.id);
         }
         return arr;
+    },
+    /**
+     * Title: 基础弹窗模板样式<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/8 15:23<br>
+     */
+    modelTemplateStyle: function () {
+        var styleArr = ['flipInY', 'fadeIn', 'bounceInRight'];
+        return styleArr[Math.floor(Math.random() * styleArr.length)];
     }
+
 };
 
 

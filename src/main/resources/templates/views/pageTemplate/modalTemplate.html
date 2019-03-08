@@ -8,7 +8,7 @@
     <!--  bootstrap 模态框弹出层 基础模板 -->
     <div class="modal" id="_base_template_max" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content animated bounceInRight">
+            <div class="modal-content animated" id="_template_max_style">
 
             </div>
         </div>
@@ -16,7 +16,7 @@
 
     <div class="modal" id="_base_template" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content animated bounceInRight">
+            <div class="modal-content animated" id="_template_style">
 
             </div>
         </div>
@@ -24,11 +24,22 @@
 
     <div class="modal" id="_base_template_min" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
-            <div class="modal-content animated bounceInRight">
+            <div class="modal-content animated" id="_template_min_style">
 
             </div>
         </div>
     </div>
+
+    <script>
+        /**
+         * Title: 随机设置弹窗样式<br>
+         * Description: <br>
+         * Author: XiaChong<br>
+         * Mail: summerpunch@163.com<br>
+         * Date: 2019/3/8 15:21<br>
+         */
+        $("#_template_max_style,#_template_style,#_template_min_style").addClass(ArrayUtil.modelTemplateStyle());
+    </script>
 </div>
 </body>
 </html>
