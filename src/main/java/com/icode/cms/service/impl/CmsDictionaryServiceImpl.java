@@ -119,6 +119,10 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
             entityWrapper.eq(DbFinal.DICT_COLUMN_STATUS, qo.getStatus());
         }
 
+        if (StringUtils.isNotBlank(qo.getItemKey())) {
+            entityWrapper.like(DbFinal.DICT_COLUMN_ITEM_KEY, qo.getItemKey());
+        }
+
         if (StringUtils.isNotBlank(qo.getItemNamecn())) {
             entityWrapper.like(DbFinal.DICT_COLUMN_ITEM_NAMECN, qo.getItemNamecn());
         }

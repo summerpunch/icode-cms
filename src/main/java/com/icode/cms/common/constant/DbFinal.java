@@ -15,6 +15,13 @@ public class DbFinal {
     public static final String DICT_KEY_ENUM = "enum";
     public static final String DICT_KEY_DB = "db";
 
+    //状态
+    public static final String DICT_KEY_DB_STATUS = "db.status";
+    //启用
+    public static final String DICT_KEY_DB_STATUS_OFF = "db.status.off";
+    //禁用
+    public static final String DICT_KEY_DB_STATUS_ON = "db.status.on";
+
 
     //dict字段
     public static final String DICT_COLUMN_ID = "id";

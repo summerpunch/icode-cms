@@ -54,9 +54,7 @@ public class DictionaryTreeNode implements Serializable {
             thisNodes.setNodes(nodes);
         } else {
             List<DictionaryTreeNode> nodes = thisNodes.getNodes();
-            if (null == nodes) {
-                return this.getNodes();
-            } else {
+            if (null != nodes) {
                 for (DictionaryTreeNode data : nodes) {
                     this.setNodes(facadeChildNode(data, node));
                 }
