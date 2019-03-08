@@ -6,6 +6,7 @@ import com.icode.cms.common.response.ResponseData;
 import com.icode.cms.common.response.ResponseDataTable;
 import com.icode.cms.common.response.ResponseUtil;
 import com.icode.cms.common.response.ResponseVerifyData;
+import com.icode.cms.common.utils.LoadDataUtil;
 import com.icode.cms.repository.entity.CmsDictionary;
 import com.icode.cms.repository.qo.CmsDictionaryQo;
 import com.icode.cms.repository.vo.CmsDictionaryVO;
@@ -100,9 +101,9 @@ public class CmsDictionaryController {
      */
     @RequestMapping("/pop/add_dictionary")
     public String popAddDictionary(HttpServletRequest request, Integer parentId) {
-        CmsDictionary casSysDictionary = new CmsDictionary();
-        casSysDictionary.setParentId(parentId);
-        request.setAttribute("casSysDictionary", casSysDictionary);
+        CmsDictionary cmsDictionary = new CmsDictionary();
+        cmsDictionary.setParentId(parentId);
+        request.setAttribute("cmsDictionary", cmsDictionary);
         return PathFinal.PATH_PAGE_POP_ADD_V_EDIT_DICTIONARY;
     }
 
@@ -115,13 +116,31 @@ public class CmsDictionaryController {
      */
     @RequestMapping("/pop/edit_dictionary")
     public String popEditDictionary(HttpServletRequest request, Integer id) {
-        CmsDictionary casSysDictionary = new CmsDictionary();
+        CmsDictionary cmsDictionary = new CmsDictionary();
         if (id != null) {
-            casSysDictionary = service.selectById(id);
+            cmsDictionary = service.selectById(id);
         }
-        request.setAttribute("casSysDictionary", casSysDictionary);
+        request.setAttribute("cmsDictionary", cmsDictionary);
         return PathFinal.PATH_PAGE_POP_ADD_V_EDIT_DICTIONARY;
     }
+
+    /**
+     * Title: 信息弹窗<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/5 14:03<br>
+     */
+    @RequestMapping("/pop/info_dictionary")
+    public String popInfoDictionary(HttpServletRequest request, Integer id) {
+        CmsDictionary cmsDictionary = LoadDataUtil.getDicDataById(id);
+        if (null == cmsDictionary) {
+            cmsDictionary = new CmsDictionary();
+        }
+        request.setAttribute("cmsDictionary", cmsDictionary);
+        return PathFinal.PATH_PAGE_POP_INFO_DICTIONARY;
+    }
+
 
     /**
      * Title: 新增or编辑保存<br>

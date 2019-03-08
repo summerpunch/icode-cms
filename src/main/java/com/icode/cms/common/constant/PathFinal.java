@@ -15,4 +15,6 @@ public class PathFinal {
 
     public static final String PATH_PAGE_POP_ADD_V_EDIT_DICTIONARY = "/views/dictionaries/pop_add_v_edit_dictionary";
 
+    public static final String PATH_PAGE_POP_INFO_DICTIONARY = "/views/dictionaries/pop_info_dictionary";
+
 }

@@ -1,0 +1,4 @@
+/*禁止输入*/
+.view-info {
+    pointer-events: none;
+}

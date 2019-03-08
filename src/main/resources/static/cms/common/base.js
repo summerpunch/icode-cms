@@ -93,7 +93,7 @@ var BootstrapTableUtil = {
      */
     actionFormatter: function (value, row, index) {
         var result = "";
-        result += "<a href='#' class='btn-xs' onclick='viewSearch(" + JSON.stringify(row) + ");' style='color: #269abc' title='查看'><span class='glyphicon glyphicon-search'></span></a>";
+        result += "<a href='#' class='btn-xs' onclick='viewInfo(" + JSON.stringify(row) + ");' style='color: #269abc' title='查看'><span class='glyphicon glyphicon-search'></span></a>";
         result += "<a href='#' class='btn-xs' onclick='viewUpdate(" + JSON.stringify(row) + ");' title='编辑'><span class='glyphicon glyphicon-pencil'></span></a>";
         result += "<a href='#' class='btn-xs' onclick='viewRemove(" + JSON.stringify(row) + ");' style='color: red' title='删除'><span class='glyphicon glyphicon-remove'></span></a>";
         return result;

@@ -1,10 +1,10 @@
-function viewSearch(id) {
-    console.info(id);
-    console.info('查看');
+function viewInfo(row) {
+    var url = PathUtil.dictionaries() + '/pop/info_dictionary?id=' + row.id;
+    BootstrapModalUtil.openBaseTemplate(url);
 }
 
-function viewUpdate(data) {
-    var url = PathUtil.dictionaries() + '/pop/edit_dictionary?id=' + data.id;
+function viewUpdate(row) {
+    var url = PathUtil.dictionaries() + '/pop/edit_dictionary?id=' + row.id;
     BootstrapModalUtil.openBaseTemplate(url);
 };
 
