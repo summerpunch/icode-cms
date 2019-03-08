@@ -14,7 +14,7 @@ function viewRemove(row) {
             var params = {ids: ArrayUtil.transformArray(row)};
             HttpUtil.ajaxAsynchronizationRequest(url, params, function () {
                 BootstrapTableUtil.refreshBootstrapTable($("#_dictionary_table"));
-                BootstrapTreeUtil.refreshRemoveTreeview($('#_dictJson'), ArrayUtil.transformArray(row));
+                BootstrapTreeUtil.refreshRemoveTreeview(ArrayUtil.transformArray(row));
             });
         }
     );
@@ -99,16 +99,7 @@ $(function () {
 
     DictionaryTableUtil.getdictChildList({id: 1});
 
-    /**
-     * Title: 点击字典树节点<br>
-     * Description: 按当前节点查询所属字典<br>
-     * Author: XiaChong<br>
-     * Mail: summerpunch@163.com<br>
-     * Date: 2019/3/1 11:56<br>
-     */
-    $('#_dictJson').on('nodeSelected', function (event, data) {
-        DictionaryTableUtil.getdictChildList({id: data.id});
-    });
+    BootstrapTreeUtil.monitorTree('#_dictJson');
 
 
     /**

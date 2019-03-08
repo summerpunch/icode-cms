@@ -135,19 +135,42 @@ var BootstrapTableUtil = {
 //处理BootstrapTree数据列表的公共方法
 var BootstrapTreeUtil = {
     /**
+     * Title: 选中的节点<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/8 10:53<br>
+     */
+    treeChooseArray: new Array(),
+    /**
+     * Title: 选中节点的子节点<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/8 10:45<br>
+     */
+    treeChooseChildArray: new Array(),
+    /**
+     * Title: 初始化数据字典后元对象<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/8 10:45<br>
+     */
+    treeDom: {},
+    /**
      * Title: 删除刷新Tree<br>
      * Description: 接收数组id<br>
      * Author: XiaChong<br>
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/1 19:51<br>
      */
-    refreshRemoveTreeview: function (_this, arr) {
-        var node = _this.treeview('getSelected');
-        var nodes = node[0].nodes;
+    refreshRemoveTreeview: function (arr) {
+        var nodes = BootstrapTreeUtil.treeChooseChildArray;
         $.each(arr, function (idx, o) {
             $.each(nodes, function (index, obj) {
                 if (o == obj.id) {
-                    _this.treeview('removeNode', [obj, {silent: true}]);
+                    BootstrapTreeUtil.treeDom.treeview('removeNode', [obj, {silent: true}]);
                     if (arr.length == (idx + 1)) {
                         return false;
                     }
@@ -162,12 +185,11 @@ var BootstrapTreeUtil = {
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 19:34<br>
      */
-    refreshEditTreeview: function (_this, json) {
-        var node = _this.treeview('getSelected');
-        var nodes = node[0].nodes;
+    refreshEditTreeview: function (json) {
+        var nodes = BootstrapTreeUtil.treeChooseChildArray;
         $.each(nodes, function (index, obj) {
             if (obj.id == json.id) {
-                _this.treeview('updateNode', [obj, json]);
+                BootstrapTreeUtil.treeDom.treeview('updateNode', [obj, json]);
                 return false;
             }
         });
@@ -179,12 +201,11 @@ var BootstrapTreeUtil = {
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/5 19:34<br>
      */
-    refreshAddTreeview: function (_this, json) {
-        var node = _this.treeview('getSelected');
-        var nodes = node[0].nodes;
+    refreshAddTreeview: function (json) {
+        var nodes = BootstrapTreeUtil.treeChooseChildArray;
         $.each(nodes, function (index, obj) {
             if (obj.id == json.parentId) {
-                _this.treeview('addNode', [json, obj]);
+                BootstrapTreeUtil.treeDom.treeview('addNode', [json, obj]);
                 return false;
             }
         });
@@ -197,12 +218,14 @@ var BootstrapTreeUtil = {
      * Date: 2019/3/7 14:29<br>
      */
     showTreeview: function (id, json) {
-        $(id).treeview({
+        BootstrapTreeUtil.treeDom = $(id).treeview({
             data: json,
             levels: 2,
             showCheckbox: false,//不显示单选
         });
         $("#1").click();
+        BootstrapTreeUtil.treeChooseArray = BootstrapTreeUtil.treeDom.treeview('getSelected');
+        BootstrapTreeUtil.treeChooseChildArray = BootstrapTreeUtil.treeChooseArray[0].nodes;
     },
     /**
      * Title: 渲染tree<br>
@@ -218,6 +241,20 @@ var BootstrapTreeUtil = {
             showCheckbox: true,
         });
     },
+    /**
+     * Title: 点击字典树节点<br>
+     * Description: 按当前节点查询所属字典<br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/1 11:56<br>
+     */
+    monitorTree: function (id) {
+        $(id).on('nodeSelected', function (event, data) {
+            BootstrapTreeUtil.treeChooseArray = BootstrapTreeUtil.treeDom.treeview('getSelected');
+            BootstrapTreeUtil.treeChooseChildArray = BootstrapTreeUtil.treeChooseArray[0].nodes;
+            DictionaryTableUtil.getdictChildList({id: data.id});
+        });
+    }
 };
 
 //处理BootstrapModal的公共方法

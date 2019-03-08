@@ -16,9 +16,9 @@ $(function () {
                 $("#_base_template").modal("hide");
                 BootstrapTableUtil.refreshBootstrapTable($("#_dictionary_table"));
                 if (params.id) {
-                    BootstrapTreeUtil.refreshEditTreeview($('#_dictJson'), EntityUtil.dictTreeJson(data.data));
+                    BootstrapTreeUtil.refreshEditTreeview(EntityUtil.dictTreeJson(data.data));
                 } else {
-                    BootstrapTreeUtil.refreshAddTreeview($('#_dictJson'), EntityUtil.dictTreeJson(data.data));
+                    BootstrapTreeUtil.refreshAddTreeview(EntityUtil.dictTreeJson(data.data));
                 }
             });
         }
