@@ -2,8 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <head th:include="layout/header"/>
+    <link th:href="@{/hplus/css/bootstrap.min.css?v=3.3.6}" rel="stylesheet">
 </head>
+<style>
+    /*下拉框样式*/
+    .chosen-container-single {
+        float: right;
+    }
+</style>
 <body class="gray-bg">
+
+
 <div class="row wrapper wrapper-content animated fadeInRight">
     <div class="col-sm-12">
         <div class="ibox float-e-margins">
@@ -53,6 +62,15 @@
                                     </button>
                                     <form id="_dictFormSearch">
                                         <div class="input-group">
+                                            <div class="col-sm-3 input-group" style="float: right;width:150px;">
+                                                <select data-placeholder="按状态" name="status" class="chosen-select"
+                                                        style="width: 150px;" tabindex="2">
+                                                    <option value="">请选择</option>
+                                                    <option th:each="item:${DICT_KEY_DB_STATUS}" th:value="${item.id}"
+                                                            th:text="${item.itemNamecn}"></option>
+                                                </select>
+                                            </div>
+
                                             <div class="col-sm-3 input-group" style="float: right;">
                                                 <input type="text" placeholder="按字典Key" name="itemKey"
                                                        class="input form-control">

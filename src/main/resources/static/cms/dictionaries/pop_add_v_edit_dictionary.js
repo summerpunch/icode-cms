@@ -1,6 +1,8 @@
-$(function () {
+$(document).ready(function () {
 
     formValidator();
+
+    ChosenUtils.initChosen();
 
     /**
      * Title: 保存<br>

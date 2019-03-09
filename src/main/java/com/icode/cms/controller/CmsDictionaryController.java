@@ -1,6 +1,7 @@
 package com.icode.cms.controller;
 
 
+import com.icode.cms.common.constant.DbFinal;
 import com.icode.cms.common.constant.PathFinal;
 import com.icode.cms.common.response.ResponseData;
 import com.icode.cms.common.response.ResponseDataTable;
@@ -47,7 +48,8 @@ public class CmsDictionaryController {
      * Date: 2019/3/1 11:17<br>
      */
     @RequestMapping("/pop/idx")
-    public String index() {
+    public String index(HttpServletRequest request) {
+        request.setAttribute("DICT_KEY_DB_STATUS", LoadDataUtil.getDicChildByKey(DbFinal.DICT_KEY_DB_STATUS));
         return PathFinal.PAGE_DICTIONARIES_IDX;
     }
 
@@ -104,6 +106,7 @@ public class CmsDictionaryController {
         CmsDictionary cmsDictionary = new CmsDictionary();
         cmsDictionary.setParentId(parentId);
         request.setAttribute("cmsDictionary", cmsDictionary);
+        LoadDataUtil.initStatus(request);
         return PathFinal.PATH_PAGE_POP_ADD_V_EDIT_DICTIONARY;
     }
 
@@ -121,6 +124,7 @@ public class CmsDictionaryController {
             cmsDictionary = service.selectById(id);
         }
         request.setAttribute("cmsDictionary", cmsDictionary);
+        LoadDataUtil.initStatus(request);
         return PathFinal.PATH_PAGE_POP_ADD_V_EDIT_DICTIONARY;
     }
 
@@ -138,6 +142,7 @@ public class CmsDictionaryController {
             cmsDictionary = new CmsDictionary();
         }
         request.setAttribute("cmsDictionary", cmsDictionary);
+        LoadDataUtil.initStatus(request);
         return PathFinal.PATH_PAGE_POP_INFO_DICTIONARY;
     }
 

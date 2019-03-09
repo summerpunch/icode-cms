@@ -528,6 +528,7 @@ var ClearUtil = {
      * Date: 2019/3/5 17:21<br>
      */
     fromClears: function (id) {
+        $('.chosen-select').val('').trigger("chosen:updated");
         $(id)[0].reset();
     }
 };
@@ -591,6 +592,37 @@ var ArrayUtil = {
 
 };
 
-
+var ChosenUtils = {
+    config: function () {
+        return {
+            '.chosen-select': {},
+            '.chosen-select-deselect': {
+                allow_single_deselect: true
+            },
+            '.chosen-select-no-single': {
+                disable_search_threshold: 10
+            },
+            '.chosen-select-no-results': {
+                no_results_text: 'Oops, nothing found!'
+            },
+            '.chosen-select-width': {
+                width: "95%"
+            }
+        }
+    },
+    /**
+     * Title: 初始化多选框<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/9 12:57<br>
+     */
+    initChosen: function () {
+        var config = ChosenUtils.config();
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+    }
+};
 
 

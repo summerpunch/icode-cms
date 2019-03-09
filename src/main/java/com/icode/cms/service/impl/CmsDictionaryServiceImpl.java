@@ -127,6 +127,8 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
             entityWrapper.like(DbFinal.DICT_COLUMN_ITEM_NAMECN, qo.getItemNamecn());
         }
 
+        entityWrapper.orderBy(DbFinal.DICT_COLUMN_SORT);
+
         List<CmsDictionaryDto> resourceDTO = new ArrayList<>();
         Page<CmsDictionary> page = new Page<>(qo.getPageIndex(), qo.getPageSize());
         page = selectPage(page, entityWrapper);

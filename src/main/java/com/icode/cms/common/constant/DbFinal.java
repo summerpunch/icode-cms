@@ -25,9 +25,12 @@ public class DbFinal {
 
     //dict字段
     public static final String DICT_COLUMN_ID = "id";
+    public static final String DICT_COLUMN_ITEM_LEVEL = "item_level";
     public static final String DICT_COLUMN_ITEM_KEY = "item_key";
     public static final String DICT_COLUMN_PARENT_ID = "parent_id";
     public static final String DICT_COLUMN_STATUS = "status";
     public static final String DICT_COLUMN_ITEM_NAMECN = "item_namecn";
+    public static final String DICT_COLUMN_UPDATE_TIME = "update_time";
+    public static final String DICT_COLUMN_SORT = "sort";
 
 }

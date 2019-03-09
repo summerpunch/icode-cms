@@ -70,6 +70,10 @@ var DictionaryTableUtil = {
                 field: 'status',
                 title: '状态'
             }, {
+
+                field: 'sort',
+                title: '顺序'
+            }, {
                 field: 'id',
                 title: '操作',
                 width: 100,
@@ -94,13 +98,14 @@ var DictionaryTableUtil = {
 };
 
 
-$(function () {
+$(document).ready(function () {
     DictionaryTableUtil.getDictionaryTree();
 
     DictionaryTableUtil.getdictChildList({id: 1});
 
     BootstrapTreeUtil.monitorTree('#_dictJson');
 
+    ChosenUtils.initChosen();
 
     /**
      * Title: 新增数据字典页面<br>

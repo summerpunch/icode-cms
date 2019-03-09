@@ -2,12 +2,14 @@ package com.icode.cms.common.utils;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.icode.cms.common.constant.DbFinal;
 import com.icode.cms.repository.entity.CmsDictionary;
 import com.icode.cms.service.ICmsDictionaryService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -218,8 +220,8 @@ public class LoadDataUtil {
      */
     public static List<CmsDictionary> initDictionary(ICmsDictionaryService cmsDictionaryService) {
         EntityWrapper<CmsDictionary> wrapper = new EntityWrapper<>();
-        wrapper.orderBy("item_level", true);
-        wrapper.orderBy("update_time", false);
+        wrapper.orderBy(DbFinal.DICT_COLUMN_ITEM_LEVEL);
+        wrapper.orderBy(DbFinal.DICT_COLUMN_SORT);
         List<CmsDictionary> listNodes = cmsDictionaryService.selectList(wrapper);
         if (!listNodes.isEmpty()) {
             LoadDataUtil.buildLocalCache(listNodes);
@@ -227,6 +229,7 @@ public class LoadDataUtil {
         }
         return null;
     }
+
     /**
      * Title: 获取并行流<br>
      * Description: <br>
@@ -234,7 +237,18 @@ public class LoadDataUtil {
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/8 13:19<br>
      */
-    public static Supplier<Stream<CmsDictionary>> getParallelStream(){
-       return PARALLEL_STREAM;
+    public static Supplier<Stream<CmsDictionary>> getParallelStream() {
+        return PARALLEL_STREAM;
     }
+
+
+    /********
+     *
+     * 数据字典存入request域
+     *
+     * *******/
+    public static void initStatus(HttpServletRequest request) {
+        request.setAttribute("DICT_KEY_DB_STATUS", LoadDataUtil.getDicChildByKey(DbFinal.DICT_KEY_DB_STATUS));
+    }
+
 }
