@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50710
 File Encoding         : 65001
 
-Date: 2019-03-05 19:51:54
+Date: 2019-03-10 13:20:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,11 +38,17 @@ CREATE TABLE `cms_dictionary` (
   KEY `idx_parent_id` (`parent_id`) USING BTREE,
   KEY `idx_fr_state` (`status`) USING BTREE,
   KEY `idx_sort` (`sort`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=527 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='数据字典';
+) ENGINE=InnoDB AUTO_INCREMENT=589 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='数据字典';
 
 -- ----------------------------
 -- Records of cms_dictionary
 -- ----------------------------
-INSERT INTO `cms_dictionary` VALUES ('1', '0', 'root', '0', '', '根节点', null, null, '根节点', '2018-07-11 19:23:41.000000', '2018-07-11 19:23:44.000000', '1', '1');
-INSERT INTO `cms_dictionary` VALUES ('2', '1', 'enum', '1', '', '枚举相关', null, null, '枚举相关', '2018-07-02 19:26:46.000000', '2018-08-14 17:52:57.441000', '1', '1');
-INSERT INTO `cms_dictionary` VALUES ('3', '1', 'db', '1', '', '数据库相关', null, null, '数据库相关', '2019-03-30 21:14:19.000000', '2019-03-14 21:14:16.000000', '1', '1');
+INSERT INTO `cms_dictionary` VALUES ('1', '0', 'root', '0', '', '根节点', null, '5', null, '2018-07-11 19:23:41.000000', '2018-07-11 19:23:44.000000', '1', '1');
+INSERT INTO `cms_dictionary` VALUES ('2', '1', 'enum', '1', '', '枚举相关', '1', '5', null, '2018-07-02 19:26:46.000000', '2018-08-14 17:52:57.441000', '1', '1');
+INSERT INTO `cms_dictionary` VALUES ('3', '1', 'db', '1', '', '数据库相关', '2', '5', null, '2019-03-30 21:14:19.000000', '2019-03-14 21:14:16.000000', '1', '1');
+INSERT INTO `cms_dictionary` VALUES ('4', '3', 'db.status', '2', '状态', '状态', '1', '5', null, '2019-03-06 10:11:09.499000', '2019-03-06 10:11:09.499000', '1', '1');
+INSERT INTO `cms_dictionary` VALUES ('5', '4', 'db.status.on', '3', '启用', '启用', '1', '5', null, '2019-03-06 10:11:29.770000', '2019-03-06 10:11:29.770000', '1', '1');
+INSERT INTO `cms_dictionary` VALUES ('6', '4', 'db.status.off', '3', '禁用', '禁用', '2', '5', null, '2019-03-06 10:11:50.289000', '2019-03-06 10:11:50.289000', '1', '1');
+INSERT INTO `cms_dictionary` VALUES ('7', '3', 'db.sex', '2', '性别', '性别', '2', '5', null, '2019-03-06 10:09:05.635000', '2019-03-06 10:09:05.635000', '1', '1');
+INSERT INTO `cms_dictionary` VALUES ('8', '7', 'db.sex.woman', '3', '女', '女', '1', '5', null, '2019-03-06 10:09:44.073000', '2019-03-06 10:10:29.880000', '1', '1');
+INSERT INTO `cms_dictionary` VALUES ('9', '7', 'db.sex.man', '3', '男', '男', '2', '5', null, '2019-03-06 10:10:15.974000', '2019-03-06 10:10:15.974000', '1', '1');
