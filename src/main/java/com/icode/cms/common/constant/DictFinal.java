@@ -7,8 +7,7 @@ package com.icode.cms.common.constant;
  * Mail: summerpunch@163.com<br>
  * Date: 2019/3/6 9:47<br>
  */
-public class DBFinal {
-
+public class DictFinal {
 
     //字典key
     public static final String DICT_KEY_ROOT = "root";
@@ -58,7 +57,6 @@ public class DBFinal {
     public static final String DICT_KEY_ENUM_CACHE_COMMON_EXCEPTIONTIMEOUT = "enum.cache.common.exceptiontimeout";
 
 
-
     //dict字段
     public static final String DICT_COLUMN_ID = "id";
     public static final String DICT_COLUMN_ITEM_LEVEL = "item_level";
@@ -68,7 +66,5 @@ public class DBFinal {
     public static final String DICT_COLUMN_ITEM_NAMECN = "item_namecn";
     public static final String DICT_COLUMN_UPDATE_TIME = "update_time";
     public static final String DICT_COLUMN_SORT = "sort";
-
-
 
 }

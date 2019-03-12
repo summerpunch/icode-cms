@@ -2,7 +2,7 @@ package com.icode.cms.common.utils;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.icode.cms.common.constant.DBFinal;
+import com.icode.cms.common.constant.DictFinal;
 import com.icode.cms.repository.entity.CmsDictionary;
 import com.icode.cms.service.ICmsDictionaryService;
 import org.apache.commons.lang3.StringUtils;
@@ -220,8 +220,8 @@ public class LoadDataUtil {
      */
     public static List<CmsDictionary> initDictionary(ICmsDictionaryService cmsDictionaryService) {
         EntityWrapper<CmsDictionary> wrapper = new EntityWrapper<>();
-        wrapper.orderBy(DBFinal.DICT_COLUMN_ITEM_LEVEL);
-        wrapper.orderBy(DBFinal.DICT_COLUMN_SORT);
+        wrapper.orderBy(DictFinal.DICT_COLUMN_ITEM_LEVEL);
+        wrapper.orderBy(DictFinal.DICT_COLUMN_SORT);
         List<CmsDictionary> listNodes = cmsDictionaryService.selectList(wrapper);
         if (!listNodes.isEmpty()) {
             LoadDataUtil.buildLocalCache(listNodes);
@@ -257,7 +257,7 @@ public class LoadDataUtil {
      * Date: 2019/3/12 10:29<br>
      */
     public static void initStatus(HttpServletRequest request) {
-        request.setAttribute("DICT_KEY_DB_STATUS", LoadDataUtil.getDicChildByKey(DBFinal.DICT_KEY_DB_STATUS));
+        request.setAttribute("DICT_KEY_DB_STATUS", LoadDataUtil.getDicChildByKey(DictFinal.DICT_KEY_DB_STATUS));
     }
 
     /**
