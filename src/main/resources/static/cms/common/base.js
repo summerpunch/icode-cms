@@ -595,7 +595,10 @@ var ArrayUtil = {
 var ChosenUtils = {
     config: function () {
         return {
-            '.chosen-select': {},
+            '.chosen-select': {
+                //模糊匹配
+                search_contains: true,
+            },
             '.chosen-select-deselect': {
                 allow_single_deselect: true
             },

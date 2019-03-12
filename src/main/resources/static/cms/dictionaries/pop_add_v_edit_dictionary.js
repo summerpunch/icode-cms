@@ -38,28 +38,25 @@ function formValidator() {
 
     $("#_dict_add_v_edit_form").bootstrapValidator({
         message: 'This value is not valid',
+        excluded: [':disabled'],//默认禁用/隐藏控件不验证，这里只手动排除禁用控件，即除了禁用控件外其他控件都校验
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
+
             parentId: {
-                message: '父节点 验证失败 .',
+                message: '父节点验证失败 .',
                 validators: {
                     notEmpty: {
-                        message: '父节点名称 不能为空 .'
-                    },
-                    stringLength: {
-                        min: 1,
-                        max: 100,
-                        message: '父节点名称 不能超过 100 个字符 .'
+                        message: '父节点名称不能为空 .'
                     }
                 }
             },
 
             itemKey: {
-                message: '字典Key 验证失败 .',
+                message: '字典Key验证失败 .',
                 validators: {
                     notEmpty: {
                         message: '字典Key不能为空 .'
@@ -155,8 +152,7 @@ function formValidator() {
                         message: '描述不能超过 100 个字符 .'
                     }
                 }
-            },
-
-        },
+            }
+        }
     })
 }

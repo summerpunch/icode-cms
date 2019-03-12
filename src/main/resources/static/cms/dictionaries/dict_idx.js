@@ -114,13 +114,8 @@ $(document).ready(function () {
      * Date: 2019/3/5 14:18<br>
      */
     $("#_addDictionary").on("click", function () {
-        var data = BootstrapTableUtil.getChooseTableDataMulti($('#_dictionary_table'));
-        if (data.length == 1) {
-            var url = PathUtil.dictionaries() + '/pop/add_dictionary?parentId=' + data[0].id;
-            BootstrapModalUtil.openBaseTemplate(url);
-        } else {
-            parent.layer.msg('请仅选择一项作为父节点 . ', {icon: 6});
-        }
+        var url = PathUtil.dictionaries() + '/pop/add_dictionary';
+        BootstrapModalUtil.openBaseTemplate(url);
     });
 
     /**

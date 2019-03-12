@@ -2,7 +2,7 @@ package com.icode.cms.common.utils;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.icode.cms.common.constant.DbFinal;
+import com.icode.cms.common.constant.DBFinal;
 import com.icode.cms.repository.entity.CmsDictionary;
 import com.icode.cms.service.ICmsDictionaryService;
 import org.apache.commons.lang3.StringUtils;
@@ -220,8 +220,8 @@ public class LoadDataUtil {
      */
     public static List<CmsDictionary> initDictionary(ICmsDictionaryService cmsDictionaryService) {
         EntityWrapper<CmsDictionary> wrapper = new EntityWrapper<>();
-        wrapper.orderBy(DbFinal.DICT_COLUMN_ITEM_LEVEL);
-        wrapper.orderBy(DbFinal.DICT_COLUMN_SORT);
+        wrapper.orderBy(DBFinal.DICT_COLUMN_ITEM_LEVEL);
+        wrapper.orderBy(DBFinal.DICT_COLUMN_SORT);
         List<CmsDictionary> listNodes = cmsDictionaryService.selectList(wrapper);
         if (!listNodes.isEmpty()) {
             LoadDataUtil.buildLocalCache(listNodes);
@@ -247,8 +247,28 @@ public class LoadDataUtil {
      * 数据字典存入request域
      *
      * *******/
+
+
+    /**
+     * Title: 数据字典状态存入request域<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/12 10:29<br>
+     */
     public static void initStatus(HttpServletRequest request) {
-        request.setAttribute("DICT_KEY_DB_STATUS", LoadDataUtil.getDicChildByKey(DbFinal.DICT_KEY_DB_STATUS));
+        request.setAttribute("DICT_KEY_DB_STATUS", LoadDataUtil.getDicChildByKey(DBFinal.DICT_KEY_DB_STATUS));
+    }
+
+    /**
+     * Title: 所有数据字典存入request域<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/12 10:29<br>
+     */
+    public static void initDictAll(HttpServletRequest request) {
+        request.setAttribute("DICT_ALL", LoadDataUtil.getAllDictionary());
     }
 
 }
