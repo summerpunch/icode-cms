@@ -40,6 +40,24 @@ var DictionaryTableUtil = {
             }
         });
     },
+    /**
+     * Title: 获取所有数据字典数据，key为id<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/12 16:57<br>
+     */
+    getDictionaryMap: function () {
+        $.ajax({
+            type: 'POST',
+            url: PathUtil.dictionaries() + '/get/dictionaryAllMap',
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                BootstrapTreeUtil.treeMap = data.data;
+            }
+        });
+    },
 
     /**
      * Title: 查询数据字典列表<br>
@@ -100,6 +118,8 @@ var DictionaryTableUtil = {
 
 $(document).ready(function () {
     DictionaryTableUtil.getDictionaryTree();
+
+    DictionaryTableUtil.getDictionaryMap();
 
     DictionaryTableUtil.getdictChildList({id: 1});
 

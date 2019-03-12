@@ -65,6 +65,19 @@ public class CmsDictionaryController {
         return service.getDictionaryTree();
     }
 
+    /**
+     * Title: 获取所有字典数据<br>
+     * Description: 返回Map,key为id<br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/1 11:17<br>
+     */
+    @RequestMapping(value = "get/dictionaryAllMap")
+    @ResponseBody
+    public ResponseData getDictionaryMap() {
+        return ResponseUtil.success(LoadDataUtil.getDictionaryMapId());
+    }
+
 
     /**
      * Title: 按条件查询数据字典列表<br>
@@ -143,6 +156,7 @@ public class CmsDictionaryController {
         }
         request.setAttribute("cmsDictionary", cmsDictionary);
         LoadDataUtil.initStatus(request);
+        LoadDataUtil.initDictAll(request);
         return PathFinal.PATH_PAGE_POP_INFO_DICTIONARY;
     }
 

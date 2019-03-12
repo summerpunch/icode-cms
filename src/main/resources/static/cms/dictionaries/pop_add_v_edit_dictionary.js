@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    StyleUtils.pointerEvents($("#_id").val(), '.no-events');
+
     formValidator();
 
     ChosenUtils.initChosen();

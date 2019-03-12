@@ -92,7 +92,7 @@ public class LoadDataUtil {
 
     /**
      * Title: 获取所有字典数据<br>
-     * Description: <br>
+     * Description: 返回List<br>
      * Author: XiaChong<br>
      * Mail: summerpunch@163.com<br>
      * Date: 2019/2/28 16:42<br>
@@ -100,6 +100,29 @@ public class LoadDataUtil {
     public static List<CmsDictionary> getAllDictionary() {
         return LIST_NODES;
     }
+
+    /**
+     * Title: 获取所有字典数据<br>
+     * Description: 返回Map,key为ID<br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/2/28 16:42<br>
+     */
+    public static Map<Integer, CmsDictionary> getDictionaryMapId() {
+        return ID_MAP;
+    }
+
+    /**
+     * Title: 获取所有字典数据<br>
+     * Description: 返回Map,key为key<br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/2/28 16:42<br>
+     */
+    public static Map<String, CmsDictionary> getDictionaryMapKey() {
+        return KEY_MAP;
+    }
+
 
     /**
      * Title: 根据key获取字典id<br>

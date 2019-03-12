@@ -3,7 +3,7 @@ package com.icode.cms.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.icode.cms.common.constant.DbFinal;
+import com.icode.cms.common.constant.DictFinal;
 import com.icode.cms.common.constant.ResponseFinal;
 import com.icode.cms.common.response.ResponseData;
 import com.icode.cms.common.response.ResponseUtil;
@@ -93,9 +93,9 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
     public ResponseVerifyData uniquenessDictionary(Integer id, String itemKey) {
         ResponseVerifyData responseVerifyData = new ResponseVerifyData();
         EntityWrapper<CmsDictionary> wrapper = new EntityWrapper();
-        wrapper.eq(DbFinal.DICT_COLUMN_ITEM_KEY, itemKey.trim());
+        wrapper.eq(DictFinal.DICT_COLUMN_ITEM_KEY, itemKey.trim());
         if (id != null) {
-            wrapper.notIn(DbFinal.DICT_COLUMN_ID, id);
+            wrapper.notIn(DictFinal.DICT_COLUMN_ID, id);
         }
         int i = selectCount(wrapper);
         if (i > 0) {
@@ -112,22 +112,22 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
         EntityWrapper<CmsDictionary> entityWrapper = new EntityWrapper<>();
 
         if (qo.getId() != null) {
-            entityWrapper.eq(DbFinal.DICT_COLUMN_PARENT_ID, qo.getId());
+            entityWrapper.eq(DictFinal.DICT_COLUMN_PARENT_ID, qo.getId());
         }
 
         if (qo.getStatus() != null) {
-            entityWrapper.eq(DbFinal.DICT_COLUMN_STATUS, qo.getStatus());
+            entityWrapper.eq(DictFinal.DICT_COLUMN_STATUS, qo.getStatus());
         }
 
         if (StringUtils.isNotBlank(qo.getItemKey())) {
-            entityWrapper.like(DbFinal.DICT_COLUMN_ITEM_KEY, qo.getItemKey());
+            entityWrapper.like(DictFinal.DICT_COLUMN_ITEM_KEY, qo.getItemKey());
         }
 
         if (StringUtils.isNotBlank(qo.getItemNamecn())) {
-            entityWrapper.like(DbFinal.DICT_COLUMN_ITEM_NAMECN, qo.getItemNamecn());
+            entityWrapper.like(DictFinal.DICT_COLUMN_ITEM_NAMECN, qo.getItemNamecn());
         }
 
-        entityWrapper.orderBy(DbFinal.DICT_COLUMN_SORT);
+        entityWrapper.orderBy(DictFinal.DICT_COLUMN_SORT);
 
         List<CmsDictionaryDto> resourceDTO = new ArrayList<>();
         Page<CmsDictionary> page = new Page<>(qo.getPageIndex(), qo.getPageSize());

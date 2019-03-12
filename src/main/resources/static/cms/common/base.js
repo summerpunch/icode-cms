@@ -1,3 +1,5 @@
+
+
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 /*             Bootstrap相关公共方法                 */
@@ -135,29 +137,54 @@ var BootstrapTableUtil = {
 //处理BootstrapTree数据列表的公共方法
 var BootstrapTreeUtil = {
     /**
-     * Title: 选中的节点<br>
+     * Title: 基础根节点<br>
      * Description: <br>
      * Author: XiaChong<br>
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/8 10:53<br>
      */
-    treeChooseArray: new Array(),
+    treeBaseNode: new Array(),
     /**
-     * Title: 选中节点的子节点<br>
+     * Title: 基础根节点<br>
      * Description: <br>
      * Author: XiaChong<br>
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/8 10:45<br>
      */
-    treeChooseChildArray: new Array(),
+    treeBaseNodes: new Array(),
     /**
-     * Title: 初始化数据字典后元对象<br>
+     * Title: 初始化数据字典后DOM元对象<br>
      * Description: <br>
      * Author: XiaChong<br>
      * Mail: summerpunch@163.com<br>
      * Date: 2019/3/8 10:45<br>
      */
     treeDom: {},
+    /**
+     * Title: 所有数据字典对象，key为id<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/12 16:56<br>
+     */
+    treeMap: {},
+    /**
+     * Title: 父节点调用链数组<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/12 17:38<br>
+     */
+    faceArr: new Array(),
+    /**
+     * Title: 直属父节点数据<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/12 17:39<br>
+     */
+    faceData: {},
+
     /**
      * Title: 删除刷新Tree<br>
      * Description: 接收数组id<br>
@@ -166,19 +193,23 @@ var BootstrapTreeUtil = {
      * Date: 2019/3/1 19:51<br>
      */
     refreshRemoveTreeview: function (arr) {
-        var nodes = BootstrapTreeUtil.treeChooseChildArray;
-        var treeArr = new Array();
-        $.each(nodes, function (index, obj) {
-            if (arr.indexOf(obj.id) > -1) {
-                treeArr.push(obj);
-                if ((arr.length) === (treeArr.length)) {
-                    $.each(treeArr, function (idx, o) {
-                        BootstrapTreeUtil.treeDom.treeview('removeNode', [o, {silent: true}]);
-                    });
-                    return false;
+        if (arr) {
+            var treeArr = new Array();
+            var node = BootstrapTreeUtil.treeMap[arr[0]];
+            BootstrapTreeUtil.faceTreeviewByPid(BootstrapTreeUtil.treeBaseNodes, node['parentId']);
+            var nodes = BootstrapTreeUtil.faceData.nodes;
+            $.each(nodes, function (index, obj) {
+                if (arr.indexOf(obj.id) > -1) {
+                    treeArr.push(obj);
+                    if ((arr.length) === (treeArr.length)) {
+                        $.each(treeArr, function (idx, o) {
+                            BootstrapTreeUtil.treeDom.treeview('removeNode', [o, {silent: true}]);
+                        });
+                        return false;
+                    }
                 }
-            }
-        });
+            });
+        }
     },
     /**
      * Title: 更新后刷新<br>
@@ -188,13 +219,18 @@ var BootstrapTreeUtil = {
      * Date: 2019/3/5 19:34<br>
      */
     refreshEditTreeview: function (json) {
-        var nodes = BootstrapTreeUtil.treeChooseChildArray;
-        $.each(nodes, function (index, obj) {
-            if (obj.id == json.id) {
-                BootstrapTreeUtil.treeDom.treeview('updateNode', [obj, json]);
-                return false;
+        BootstrapTreeUtil.faceTreeview(BootstrapTreeUtil.treeBaseNodes, json);
+        var nodes = BootstrapTreeUtil.faceData['nodes'];
+        if (nodes) {
+            if (nodes.length > 0) {
+                $.each(nodes, function (index, obj) {
+                    if (obj.id == json.id) {
+                        BootstrapTreeUtil.treeDom.treeview('updateNode', [obj, json]);
+                        return false;
+                    }
+                });
             }
-        });
+        }
     },
     /**
      * Title: 新增后刷新<br>
@@ -204,10 +240,81 @@ var BootstrapTreeUtil = {
      * Date: 2019/3/5 19:34<br>
      */
     refreshAddTreeview: function (json) {
-        var nodes = BootstrapTreeUtil.treeChooseChildArray;
+        var pid = json.parentId;
+        var nodes = BootstrapTreeUtil.treeBaseNodes;
+        BootstrapTreeUtil.faceArr.push(json['parentId']);
+        BootstrapTreeUtil.faceTreeviewParentId(json['parentId']);
+        BootstrapTreeUtil.faceTreeview(nodes, json);
+        var arr = BootstrapTreeUtil.faceArr;
+        if (arr.length > 0) {
+            BootstrapTreeUtil.treeDom.treeview('collapseAll');
+            for (var i = arr.length - 1; i >= 0; i--) {
+                var _id = '#' + arr[i];
+                $(_id).click();
+                $(_id).find('.expand-icon').click();
+            }
+            if (BootstrapTreeUtil.faceData) {
+                BootstrapTreeUtil.treeDom.treeview('addNode', [json, BootstrapTreeUtil.faceData]);
+                BootstrapTreeUtil.treeMap[json.id] = {
+                    id: json.id,
+                    parentId: pid,
+                    text: json.text
+                };
+                BootstrapTreeUtil.faceArr = new Array();
+                BootstrapTreeUtil.faceData = {};
+            }
+        }
+    },
+    /**
+     * Title: 递归找到父节点调用链<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/12 17:37<br>
+     */
+    faceTreeviewParentId: function (parentId) {
+        var data = BootstrapTreeUtil.treeMap[parentId];
+        if (data) {
+            if (data.parentId > 0) {
+                BootstrapTreeUtil.faceArr.push(data.parentId);
+                BootstrapTreeUtil.faceTreeviewParentId(data.parentId);
+            }
+        }
+    },
+    /**
+     * Title: 递归找到自己的父节点<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/12 17:36<br>
+     */
+    faceTreeview: function (nodes, json) {
         $.each(nodes, function (index, obj) {
+            var arr = obj['nodes'];
+            if (arr) {
+                BootstrapTreeUtil.faceTreeview(arr, json);
+            }
             if (obj.id == json.parentId) {
-                BootstrapTreeUtil.treeDom.treeview('addNode', [json, obj]);
+                BootstrapTreeUtil.faceData = obj;
+                return false;
+            }
+        });
+    },
+    /**
+     * Title: 根据pid递归找到自己的父节点<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/3/12 17:36<br>
+     */
+    faceTreeviewByPid: function (nodes, pid) {
+        $.each(nodes, function (index, obj) {
+            var arr = obj['nodes'];
+            if (arr) {
+                BootstrapTreeUtil.faceTreeviewByPid(arr, pid);
+            }
+            if (obj.id == pid) {
+                BootstrapTreeUtil.faceData = obj;
                 return false;
             }
         });
@@ -226,8 +333,8 @@ var BootstrapTreeUtil = {
             showCheckbox: false,//不显示单选
         });
         $("#1").click();
-        BootstrapTreeUtil.treeChooseArray = BootstrapTreeUtil.treeDom.treeview('getSelected');
-        BootstrapTreeUtil.treeChooseChildArray = BootstrapTreeUtil.treeChooseArray[0].nodes;
+        BootstrapTreeUtil.treeBaseNode = BootstrapTreeUtil.treeDom.treeview('getSelected');
+        BootstrapTreeUtil.treeBaseNodes = BootstrapTreeUtil.treeBaseNode[0].nodes;
     },
     /**
      * Title: 渲染tree<br>
@@ -252,8 +359,6 @@ var BootstrapTreeUtil = {
      */
     monitorTree: function (id) {
         $(id).on('nodeSelected', function (event, data) {
-            BootstrapTreeUtil.treeChooseArray = BootstrapTreeUtil.treeDom.treeview('getSelected');
-            BootstrapTreeUtil.treeChooseChildArray = BootstrapTreeUtil.treeChooseArray[0].nodes;
             DictionaryTableUtil.getdictChildList({id: data.id});
         });
     }
@@ -559,7 +664,6 @@ var EntityUtil = {
 };
 
 var ArrayUtil = {
-
     /**
      * Title: 将数组或对象转为数据<br>
      * Description: 返回id数组<br>
@@ -592,6 +696,13 @@ var ArrayUtil = {
 
 };
 
+/**
+ * Title: Chosen下拉框插件工具类<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
+ * Date: 2019/3/12 20:02<br>
+ */
 var ChosenUtils = {
     config: function () {
         return {
@@ -628,4 +739,26 @@ var ChosenUtils = {
     }
 };
 
+/**
+ * Title: 样式工具类<br>
+ * Description: <br>
+ * Author: XiaChong<br>
+ * Mail: summerpunch@163.com<br>
+ * Date: 2019/3/12 20:02<br>
+ */
+var StyleUtils = {
+        /**
+         * Title: 不可编辑<br>
+         * Description: <br>
+         * Author: XiaChong<br>
+         * Mail: summerpunch@163.com<br>
+         * Date: 2019/3/12 19:57<br>
+         */
+        pointerEvents: function (val, clazz) {
+            if (val) {
+                $(clazz).css("pointer-events", "none");
+            }
+        }
+    }
+;
 
