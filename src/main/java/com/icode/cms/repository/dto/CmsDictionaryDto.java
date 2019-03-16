@@ -37,7 +37,7 @@ public class CmsDictionaryDto implements Serializable {
     /**
      * 状态：启用、禁用（废弃）
      */
-    private Integer status;
+    private String status;
     /**
      * 备注：具体用途细节等
      */

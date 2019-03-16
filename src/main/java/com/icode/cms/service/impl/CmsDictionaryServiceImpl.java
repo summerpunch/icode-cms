@@ -136,6 +136,7 @@ public class CmsDictionaryServiceImpl extends ServiceImpl<CmsDictionaryMapper, C
         for (CmsDictionary cd : page.getRecords()) {
             CmsDictionaryDto dto = new CmsDictionaryDto();
             BeanUtils.copyProperties(cd, dto);
+            dto.setStatus(LoadDataUtil.getDicItemNamecnByKey(cd.getStatus()));
             resourceDTO.add(dto);
         }
 

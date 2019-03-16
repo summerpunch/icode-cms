@@ -41,8 +41,8 @@ var BootstrapTableUtil = {
             singleSelect: false,//单选
             clickToSelect: false,//是否启用点击选中行
             data_local: "zh-US",//表格汉化
-            pageSize: 5,//如果设置了分页，页面数据条数
-            pageList: [5, 10, 20],	//如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录
+            pageSize: 10,//如果设置了分页，页面数据条数
+            pageList: [10, 15, 20],	//如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录
             pageNumber: 1, //初始化加载第一页，默认第一页
             striped: true,//设置为 true 会有隔行变色效果
             undefinedText: " -- ",//当数据为 undefined 时显示的字符

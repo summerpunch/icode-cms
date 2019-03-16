@@ -88,16 +88,16 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">创建时间：</label>
             <div class="col-sm-8 view-info">
-                <input th:id="_createTime" th:name="createTime" th:value="${cmsDictionary.createTime}"
-                       class="form-control" type="text">
+                <input type="text" class="form-control" th:id="_createTime" th:name="createTime"
+                       th:value="${#dates.format(cmsDictionary.createTime,'yyyy-MM-dd HH:mm:ss')}">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-3 control-label">更新时间：</label>
             <div class="col-sm-8 view-info">
-                <input th:id="_updateTime" th:name="updateTime" th:value="${cmsDictionary.updateTime}"
-                       class="form-control" type="text">
+                <input type="text" class="form-control" th:id="_updateTime" th:name="updateTime"
+                       th:value="${#dates.format(cmsDictionary.updateTime,'yyyy-MM-dd HH:mm:ss')}">
             </div>
         </div>
 

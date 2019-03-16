@@ -85,9 +85,6 @@ function formValidator() {
             itemValue: {
                 message: '字典Value 验证失败 .',
                 validators: {
-                    notEmpty: {
-                        message: '字典Value不能为空 .'
-                    },
                     stringLength: {
                         min: 1,
                         max: 100,

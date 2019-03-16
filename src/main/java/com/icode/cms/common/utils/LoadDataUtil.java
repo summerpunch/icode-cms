@@ -145,6 +145,26 @@ public class LoadDataUtil {
     }
 
     /**
+     * Title: 根据id获取字典name<br>
+     * Description: <br>
+     * Author: XiaChong<br>
+     * Mail: summerpunch@163.com<br>
+     * Date: 2019/2/28 16:42<br>
+     */
+    public static String getDicItemNamecnByKey(Integer id) throws NullPointerException {
+        r.lock();
+        try {
+            CmsDictionary dictionary = getDicDataById(id);
+            if (dictionary == null) {
+                return null;
+            }
+            return dictionary.getItemNamecn();
+        } finally {
+            r.unlock();
+        }
+    }
+
+    /**
      * Title: 根据key获取字典数据<br>
      * Description: <br>
      * Author: XiaChong<br>

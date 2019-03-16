@@ -19,7 +19,6 @@ public class CmsDictionaryVO implements Serializable {
     @NotBlank(message = "字典Key不能为空")
     private String itemKey;
 
-    @NotBlank(message = "字典Value不能为空")
     private String itemValue;
 
     @NotBlank(message = "字典名称不能为空")
