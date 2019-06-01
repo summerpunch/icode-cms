@@ -74,6 +74,13 @@
             <version>3.7</version>
         </dependency>
 
+       <!--
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+        -->
 
         <!-- 阿里巴巴druid数据库连接池 -->
         <dependency>

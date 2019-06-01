@@ -1,1 +1,0 @@
-org.springframework.context.ApplicationListener=com.icode.cms.common.listener.ApplicationInitListener
