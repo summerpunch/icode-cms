@@ -82,7 +82,11 @@ var DictionaryTableUtil = {
             }, {
 
                 field: 'itemKey',
-                title: '键名称'
+                title: '字典Key'
+            }, {
+
+                field: 'itemValue',
+                title: '字典值'
             }, {
 
                 field: 'status',
